@@ -5,6 +5,7 @@ import { Background } from "../components/Background";
 import Earth from "../components/Earth2";
 import Writer from "../components/Writer";
 import Header from "../components/Header";
+import Menu from "../components/Menu";
 import "../styles/Feed.css";
 
 const Feed = () => {
@@ -24,13 +25,14 @@ const Feed = () => {
   return (
     <Background>
       <Header></Header>
-      <div className="container earth-container">
+      <div className="container is-max-desktop earth-container">
         <div className="info-container">
           <div className="time-info"></div>
           <div className="lng-info">{coord.lng}</div>
         </div>
         <Earth setCoord={setCoord}></Earth>
       </div>
+      <Menu></Menu>
       <button onClick={() => setShowModal(true)}>글쓰기</button>
       <Writer showModal={showModal} setShowModal={setShowModal} token={token} />
     </Background>

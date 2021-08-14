@@ -12,7 +12,7 @@ const Main = () => {
     <Background className="background">
       <Header></Header>
       <div
-        className="container"
+        className="container is-max-desktop"
         style={{ display: "flex", justifyContent: "space-between" }}
       >
         <div>hi</div>
