@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 
 const thumbsContainer = {
@@ -22,23 +22,40 @@ const img = {
 };
 
 const onHoverThumb = (e) => {
-  console.log(e.target);
+  //console.log(e.target);
 };
 
+
+
+
+
+let fileCount = Number(0);
+
 function Dropzone({files, setFiles}) {
+  const zoneRef = useRef(null);
+
+  const removeDropzone = () =>{
+    zoneRef.current.style.display = "none";
+    console.log(zoneRef.current);
+    
+  }
   //const [images, setImages] = useState([]);
-  const [fileCount, setFileCount] = useState(Number('0'));
+  //const [fileCount, setFileCount] = useState(Number('0'));
   //const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
+      if(fileCount >= 6){
+        removeDropzone();
+      }
       setFiles([
         ...files,
         acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file)
           }),
-          
+          fileCount = fileCount + 1,
+          console.log(fileCount),
         ),
       ]);
     },
@@ -62,10 +79,10 @@ function Dropzone({files, setFiles}) {
   return (
     <section className="container">
       {/* <Thumbs style={thumbsContainer}></Thumbs> */}
-      <div {...getRootProps({ className: "dropzone" })}>
+      {thumbs}
+      <div {...getRootProps({ className: "dropzone" })} ref={zoneRef}>
         <input {...getInputProps()} />
         <div style={thumbsContainer}>
-          {thumbs}
           <img src={process.env.PUBLIC_URL + "/images/plus.png"} />
           <p>사진/동영상</p>
         </div>
