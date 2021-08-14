@@ -11,11 +11,17 @@ const Main = () => {
   return (
     <Background className="background">
       <Header></Header>
-      <div
-        className="container"
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
-        <div>hi</div>
+      <div className="container">
+        <div className="title">
+          <img
+            className="picture-item"
+            src={process.env.PUBLIC_URL + "/images/biglogo.png"}
+          />
+          <img
+            className="picture-item"
+            src={process.env.PUBLIC_URL + "/images/detail.png"}
+          />
+        </div>
         <Earth></Earth>
       </div>
     </Background>

@@ -11,7 +11,7 @@ const Feed = () => {
   const [token, setToken] = useState({});
   const [coord, setCoord] = useState({});
   const [showModal, setShowModal] = useState(false);
-
+  const [time, setTime] = useState({});
   useEffect(() => {
     let JWT = window.sessionStorage.getItem("JWT");
     setToken(JWT);
@@ -20,7 +20,9 @@ const Feed = () => {
   useEffect(() => {
     console.log(coord);
   }, [coord]);
-
+  useEffect(() => {
+    console.log(time);
+  }, [time]);
   return (
     <Background>
       <Header></Header>
@@ -29,7 +31,7 @@ const Feed = () => {
           <div className="time-info"></div>
           <div className="lng-info">{coord.lng}</div>
         </div>
-        <Earth setCoord={setCoord}></Earth>
+        <Earth setCoord={setCoord} setTime={setTime}></Earth>
       </div>
       <button onClick={() => setShowModal(true)}>글쓰기</button>
       <Writer showModal={showModal} setShowModal={setShowModal} token={token} />

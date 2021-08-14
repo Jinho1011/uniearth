@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Globe from "react-globe.gl";
 
-const Earth = ({ setCoord }) => {
+const Earth = ({ setCoord, setTime }) => {
   const globeEl = useRef();
   let earth = null;
   let camera = null;
@@ -19,10 +19,28 @@ const Earth = ({ setCoord }) => {
     camera.position.set(2.14313, 2.14313, 240);
   }, []);
 
+  var today = new Date();
+  // console.log(today.getHours());
+  // console.log(today.getMinutes());
   const initEarth = () => {};
 
-  const clickEvent = (lat, lng) => {
-    // console.log(lat, lng);
+  const clickEvent = (e) => {
+    setCoord({
+      lat: Math.round(e.lat),
+      lng: Math.round(e.lng),
+    });
+    let month = today.getMonth();
+    let hours = today.getHours() - Math.ceil(e.lng / 15) + 9;
+    let date = today.getDate();
+    let minutes = today.getMinutes();
+    // ,date,hours,minutes;
+    // (today.getHours() - Math.ceil(e.lng / 15) + 9)>=0?:
+    setTime({
+      month: month + 1,
+      date: date,
+      hours: hours,
+      minutes: minutes,
+    });
   };
 
   return (
