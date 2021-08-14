@@ -95,6 +95,7 @@ const SignUp = () => {
         <input
           type="radio"
           id="male"
+          readonly
           checked={sex === "male"}
           onClick={() => setSex("male")}
         ></input>
@@ -102,6 +103,7 @@ const SignUp = () => {
         <input
           type="radio"
           id="female"
+          readonly
           checked={sex === "female"}
           onClick={() => setSex("female")}
         ></input>
