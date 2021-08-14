@@ -78,6 +78,7 @@ const Login = () => {
               value={inputs.id}
             ></input>
             <input
+              type="password"
               name="pwd"
               className="form-input"
               placeholder="비밀번호를 입력해주세요"
@@ -93,6 +94,7 @@ const Login = () => {
               </div>
               <div style={{ color: "#fff" }}>자동 로그인</div>
             </div>
+            <a>비밀번호 찾기</a>
           </div>
 
           <button className="form-button" onClick={submit}>
