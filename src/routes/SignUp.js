@@ -6,10 +6,12 @@ import key from "../key";
 
 const SignUp = () => {
   const [isDone, setDone] = useState(false);
+  const [sex, setSex] = useState("");
   const [inputs, setInputs] = useState({
     id: "",
     pwd: "",
     nick: "",
+    location: "",
   });
 
   const onChange = (e) => {
@@ -29,9 +31,9 @@ const SignUp = () => {
       uniearth_user_id: inputs.id,
       uniearth_user_pw: sha256(inputs.pwd),
       uniearth_user_nickname: inputs.nick,
-      uniearth_user_sex: 1,
-      uniearth_user_address: "주소",
-      uniearth_user_phone: "010-1234-5678",
+      uniearth_user_sex: sex == "male" ? 0 : 1,
+      uniearth_user_address: inputs.location,
+      uniearth_user_phone: "",
     });
 
     var requestOptions = {
@@ -47,12 +49,26 @@ const SignUp = () => {
       .catch((error) => error);
   };
 
-  const initLocation = () => {};
+  const initLocation = () => {
+    setInputs({
+      ...inputs,
+      location: "대한민국, 서울",
+    });
+  };
 
   const submit = async () => {
     let res = await signup();
     res = JSON.parse(res);
     console.log(res);
+
+    if (res.code === "201") {
+      // success
+      alert("signup success!");
+      setDone(true);
+    } else {
+      // error
+      alert(res.error.message);
+    }
   };
 
   return (
@@ -74,7 +90,23 @@ const SignUp = () => {
         주소
         <button onClick={initLocation}>현재 위치로</button>
       </div>
-      <div></div>
+      <div>
+        성별
+        <input
+          type="radio"
+          id="male"
+          checked={sex === "male"}
+          onClick={() => setSex("male")}
+        ></input>
+        <label htmlFor="male">남성</label>
+        <input
+          type="radio"
+          id="female"
+          checked={sex === "female"}
+          onClick={() => setSex("female")}
+        ></input>
+        <label htmlFor="male">여성</label>
+      </div>
 
       {isDone ? <Redirect to="/login" /> : null}
 
