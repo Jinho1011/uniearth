@@ -70,6 +70,7 @@
   cursor: pointer;
   color: #ffffff;
   transition: 0.1s;
+  margin-bottom: 30px;
 }
 
 .form-button:hover {
@@ -80,12 +81,14 @@
 
 .form-etc {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding-bottom: 40px;
+  margin: 40px 0 20px 0;
 }
 
 .form-select-container {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
@@ -94,6 +97,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 26px;
 }
 
 .round label {
@@ -141,4 +145,20 @@
 
 .form-etc > a:hover {
   color: #ccc;
+}
+
+.input-sex {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input-sex input {
+  width: 20px;
+  height: 20px;
+}
+
+.input-sex label {
+  font-size: 18px;
+  color: #fff;
 }

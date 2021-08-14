@@ -9,6 +9,7 @@ import styled from "styled-components";
 
 const Login = () => {
   const [isDone, setDone] = useState(false);
+  const [go, setGo] = useState(false);
   const [inputs, setInputs] = useState({
     id: "",
     pwd: "",
@@ -98,8 +99,12 @@ const Login = () => {
           <button className="form-button" onClick={submit}>
             로그인
           </button>
+          <button className="form-button" onClick={() => setGo(true)}>
+            회원가입
+          </button>
         </div>
       </div>
+      {go ? <Redirect to="/register" /> : null}
       {isDone ? <Redirect to="/" /> : null}
     </Background>
   );
