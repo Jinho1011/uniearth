@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "bulma/css/bulma.min.css";
+
+import { Background } from "../components/Background";
 import Header from "../components/Header";
 import ReactGlobe from "react-globe";
 import "../styles/Main.css";
