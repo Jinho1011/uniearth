@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-// import profileImg from "../images/logo_profile.png";
-// import scope_logo from "../images/scope.png";
+import { add } from "lodash";
+import React, { useState, useEffect } from "react";
 
 import "../styles/MyProfile.css";
 
@@ -9,6 +8,7 @@ const MyProfile = () => {
   const [over, setOver] = useState(false);
   const [text, setText] = useState("잘못된 비밀번호입니다");
   const [over2, setOver2] = useState(false);
+  const [address, setAddress] = useState([]);
 
   const pwCheck = () => {
     if (pw === "12345678") {
@@ -27,6 +27,56 @@ const MyProfile = () => {
   const profileChange = () => {
     setOver2(true);
   };
+
+  const setLocation = () => {
+    if (!navigator.geolocation) {
+      console.log("사용자의 브라우저는 지오로케이션을 지원하지 않습니다.");
+      return;
+    }
+
+    function success(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+      var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}8&sensor=false&key=AIzaSyBR8RbKAXpP4kTkcQVBm_2E5jU19lb9LYo`,
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => {
+          let res = JSON.parse(result).results[0];
+          let address_comps = res.address_components;
+          console.log(
+            "🚀 ~ file: MyProfile.js ~ line 52 ~ .then ~ address_comps",
+            address_comps
+          );
+          address_comps.map((comp) => {
+            if (comp.types.includes("country")) {
+              setAddress((oldArray) => [...oldArray, comp.long_name]);
+            } else if (comp.types.includes("administrative_area_level_1")) {
+              setAddress((oldArray) => [...oldArray, comp.long_name]);
+            }
+          });
+        })
+        .catch((error) => console.log("error", error));
+    }
+    function error() {
+      console.log("사용자의 위치를 찾을 수 없습니다.");
+    }
+    console.log("Locating…");
+    navigator.geolocation.getCurrentPosition(success, error);
+
+    // https://maps.googleapis.com/maps/api/geocode/json?latlng=37,128&sensor=false&key=AIzaSyBR8RbKAXpP4kTkcQVBm_2E5jU19lb9LYo
+  };
+
+  useEffect(() => {
+    console.log(address);
+  }, [address]);
 
   return (
     <div className="profile">
@@ -82,12 +132,20 @@ const MyProfile = () => {
           <div className="profile_loca">
             <div className="profile_title">위치</div>
             <div className="profile_set" id="profile_set">
-              <div>대한민국, 서울</div>
-              {/* <img
-                src={scope_logo}
-                alt="scope"
-                className="profile_loca_search"
-              /> */}
+              <div>
+                {address.length ? (
+                  <div>
+                    {address[1]}, {address[0]}
+                  </div>
+                ) : null}
+              </div>
+              <a onClick={setLocation}>
+                <img
+                  src={process.env.PUBLIC_URL + "/images/scope_logo.png"}
+                  alt="scope"
+                  className="profile_loca_search"
+                />
+              </a>
             </div>
             <div className="profile_exp">현재 위치를 검색합니다.</div>
           </div>

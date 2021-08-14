@@ -144,8 +144,8 @@
     background-color: white;
 }
 
-#profile_set div {
-    padding: 8px 0;
+#profile_set div div {
+    padding: 4px 0;
     padding-left: 20px;
 }
 
@@ -195,12 +195,10 @@
 }
 
 .profile_button div {
-    height: 20px;
     border-radius: 20px;
     color: white;
     filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.1));
     text-align: center;
-    line-height: 20px;
     margin-top: 40px;
     margin-right: 50px;
     font-weight: 400;
@@ -228,10 +226,15 @@ input[type=password] {
     font-family: sans-serif;
 }
 
+#profile_set a {
+    padding: 6px 0;
+    margin-right: 20px;
+    float: right;
+
+}
 .profile_loca_search {
     width: 20px;
     height: 20px;
-    padding: 6px 15px;
     float: right;
 }
 
@@ -296,9 +299,6 @@ input[type=password] {
 
 .profile_check_button {
     width: 65px;
-    height: 20px;
-
-    line-height: 20px;
 
     padding: 12px 16px;
     border-radius: 20px;
