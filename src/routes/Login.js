@@ -85,12 +85,22 @@ const Login = () => {
               value={inputs.pwd}
             ></input>
           </div>
+          <div className="form-etc">
+            <div className="form-select-container">
+              <div className="round">
+                <input type="checkbox" id="checkbox" />
+                <label for="checkbox"></label>
+              </div>
+              <div style={{ color: "#fff" }}>자동 로그인</div>
+            </div>
+          </div>
 
-          <button className="form-button" onClick={() => submit()}>
+          <button className="form-button" onClick={submit}>
             로그인
           </button>
         </div>
       </div>
+      {isDone ? <Redirect to="/" /> : null}
     </Background>
   );
 };
