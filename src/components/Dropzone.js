@@ -3,8 +3,8 @@ import { useDropzone } from "react-dropzone";
 
 const thumbsContainer = {
   display: "flex",
-  // flexDirection: "row",
-  // flexWrap: "wrap",
+  flexDirection: "row",
+  flexWrap: "wrap",
   // marginTop: 16,
 };
 
@@ -17,8 +17,9 @@ const thumbInner = {
 const img = {
   display: "block",
   width: "auto",
-  height: "100px",
-  width: "100px"
+  height: "144px",
+  width: "144px",
+  margin: "4px"
 };
 
 const onHoverThumb = (e) => {
@@ -40,13 +41,15 @@ function Dropzone(props) {
     },
   });
 
-  const thumbs = files.map((file) => (
+  const images=[];
+
+  const thumbs = files.map((file) => {
     <div className="thumb" key={file.name} onMouseOver={onHoverThumb}>
       <div style={thumbInner}>
         <img src={file.preview} style={img} />
       </div>
     </div>
-  ));
+  });
 
   useEffect(
     () => () => {

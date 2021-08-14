@@ -105,19 +105,36 @@
     width: 1128px;
 }
 
-.modal section main .container .dropzone{
+.modal section main .container{
     display: flex;
 }
 
-.modal section main .container .dropzone .thumb{
-    display: inline-flex;
-    margin: 0 8px 8px 0;
-    width: 100px;
-    height: 100px;
+.modal section main .container .thumb{
+    display: flex;
+    width: 152px;
+    height: 152px;
     padding: 0;
     overflow: hidden;
     border-radius: 15px;
 };
+
+.modal section main .container .dropzone{
+    display: flex;
+    width: 152px;
+    height: 152px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.modal section main .container .dropzone img{
+    width: 40px;
+    margin: 32px 52px 20px 52px;
+}
+
+.modal section main .container .dropzone p{
+    margin: 0;
+    text-align: center;
+}
 
 .modal section main #fillout_header {
     display: block;
