@@ -5,7 +5,7 @@ import "../styles/form.css";
 
 const Menu = ({ setShowModal, continents }) => {
   useEffect(() => {
-    console.log(continents);
+    // console.log(continents);
   }, [continents]);
 
   return (

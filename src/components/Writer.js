@@ -8,7 +8,7 @@ import "../styles/Writer.css";
 
 Modal.setAppElement(document.getElementById("root"));
 
-const Writer = ({ showModal, setShowModal, token }) => {
+const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
   const [address, setAddress] = useState([]);
   const [coord, setCoord] = useState({});
   const [user, setUser] = useState({});
@@ -61,7 +61,6 @@ const Writer = ({ showModal, setShowModal, token }) => {
       setCoord({ lat: 27, lng: 127 });
       console.log("사용자의 위치를 찾을 수 없습니다.");
     }
-    console.log("Locating…");
     navigator.geolocation.getCurrentPosition(success, error);
   };
 
@@ -136,7 +135,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
 
   const submit = async () => {
     let res = await createPost();
-    console.log("🚀 ~ file: Writer.js ~ line 102 ~ submit ~ res", res);
+
     if (files.length) {
       // 파일이 있는 경우
       files.map((file) => {
@@ -144,6 +143,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
         uploadFile(file);
       });
     }
+    setRefresh(true);
     closeModal();
   };
 
@@ -200,9 +200,14 @@ const Writer = ({ showModal, setShowModal, token }) => {
             </div>
             <p>오늘 먹은(먹을) 점심은?</p>
           </div>
-          
+
           <p id="attachmentsHeader">첨부항목</p>
-          <Dropzone files={files} setFiles={setFiles} fileCount={fileCount} setFileCount={setFileCount}/>
+          <Dropzone
+            files={files}
+            setFiles={setFiles}
+            fileCount={fileCount}
+            setFileCount={setFileCount}
+          />
           <p id="fillout_header">작성란</p>
           <div id="fillout">
             <form>

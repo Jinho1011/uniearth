@@ -59,7 +59,6 @@ const SignUp = () => {
   const submit = async () => {
     let res = await signup();
     res = JSON.parse(res);
-    console.log(res);
 
     if (res.code === "201") {
       // success

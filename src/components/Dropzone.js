@@ -22,9 +22,11 @@ const img = {
   width: "144px",
 };
 
-const onClickThumb = (e) => {
-  console.log(e.target);
-};
+// const onClickThumb = (e) => {
+//   //console.log(e.target);
+//   //e.target.style.display="none";
+
+// };
 
 function Dropzone({ files, setFiles, fileCount, setFileCount }) {
   const zoneRef = useRef(null);
@@ -43,12 +45,12 @@ function Dropzone({ files, setFiles, fileCount, setFileCount }) {
       if (fileCount >= 6) {
         removeDropzone();
       }
-      let fileName=acceptedFiles[0].name.split('.');
-      // console.log(fileName);
-      let fileExtension=fileName[fileName.length-1];
-      // console.log(fileExtension);
-      if(fileExtension === "mp4" || fileExtension === "avi"){
-      }
+      // let fileName=acceptedFiles[0].name.split('.');
+      // // console.log(fileName);
+      // let fileExtension=fileName[fileName.length-1];
+      // // console.log(fileExtension);
+      // if(fileExtension === "mp4" || fileExtension === "avi"){
+      // }
       setFiles([
         ...files,
         acceptedFiles.map(
@@ -66,7 +68,7 @@ function Dropzone({ files, setFiles, fileCount, setFileCount }) {
     return (
       <div className="thumb" key={file[0].name}>
         <div style={thumbInner}>
-          <img src={file[0].preview} style={img} onClick={onClickThumb} />
+          <img src={file[0].preview} style={img} />
         </div>
       </div>
     );
@@ -84,7 +86,7 @@ function Dropzone({ files, setFiles, fileCount, setFileCount }) {
         <input {...getInputProps()} />
         <div style={thumbsContainer}>
           <img src={process.env.PUBLIC_URL + "/images/plus.png"} />
-          <p>사진/동영상</p>
+          <p>사진</p>
         </div>
       </div>
     </section>
