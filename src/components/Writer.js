@@ -61,7 +61,6 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
       setCoord({ lat: 27, lng: 127 });
       console.log("사용자의 위치를 찾을 수 없습니다.");
     }
-    console.log("Locating…");
     navigator.geolocation.getCurrentPosition(success, error);
   };
 
@@ -136,7 +135,7 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
 
   const submit = async () => {
     let res = await createPost();
-    console.log("🚀 ~ file: Writer.js ~ line 102 ~ submit ~ res", res);
+
     if (files.length) {
       // 파일이 있는 경우
       files.map((file) => {

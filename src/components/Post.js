@@ -32,7 +32,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
       .then((response) => response.text())
       .then((result) => {
         setRefresh(true);
-        console.log(result);
+        console.log("🚀 ~ file: Post.js ~ line 65 ~ .then ~ result", result);
       })
       .catch((error) => console.log("error", error));
   };
@@ -104,7 +104,6 @@ const Post = ({ user, post, refresh, setRefresh }) => {
           <div className="commnet-header">댓글</div>
           <div className="comments">
             {comments.map((comment) => {
-              console.log(comment);
               return (
                 <div key={comment.SEQ} className="comment">
                   <div className="comment-owner">{comment.cmt_owner}</div>
