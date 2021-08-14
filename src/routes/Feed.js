@@ -32,8 +32,7 @@ const Feed = () => {
         </div>
         <Earth setCoord={setCoord}></Earth>
       </div>
-      <Menu></Menu>
-      <button onClick={() => setShowModal(true)}>글쓰기</button>
+      <Menu setShowModal={setShowModal}></Menu>
       <Writer showModal={showModal} setShowModal={setShowModal} token={token} />
     </Background>
   );
