@@ -11,10 +11,13 @@ import { EqualStencilFunc } from "three";
 
 const Feed = () => {
   const [token, setToken] = useState({});
-  const [coord, setCoord] = useState({});
+  const [coord, setCoord] = useState({
+    lat: 37,
+    lng: 127,
+  });
   const [showModal, setShowModal] = useState(false);
   const [time, setTime] = useState({});
-  // const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState({});
   const [continents, setContinents] = useState([]);
   const c = [
     { name: "아시아", range: [24, 127] },
@@ -29,29 +32,36 @@ const Feed = () => {
     let JWT = window.sessionStorage.getItem("JWT");
     setToken(JWT);
   }, []);
+
   useEffect(() => {
-    setContinents([]);
+    let temp = [];
+
     c.map((a) => {
-      // console.log(a.range[0]);
       if (a.range[0] <= coord.lng && coord.lng <= a.range[1]) {
-        setContinents([...continents, a.name]);
+        temp.push(a.name);
       }
     });
-    console.log(continents);
-    console.log(coord);
+
+    setContinents(temp);
   }, [coord]);
+
   useEffect(() => {
-    console.log(time);
+    // console.log(time);
   }, [time]);
+
   return (
     <Background>
       <Header></Header>
       <div className="container is-max-desktop earth-container">
         <div className="info-container">
-          <div className="time-info">
-            {time.hours}:{time.minutes}
-          </div>
-          <div className="lng-info">{coord.lng}</div>
+          {coord ? (
+            <>
+              <div className="time-info">
+                {time.hours}:{time.minutes}
+              </div>
+              <div className="lng-info">{coord.lng}°</div>
+            </>
+          ) : null}
         </div>
         <Earth setCoord={setCoord} setTime={setTime}></Earth>
       </div>

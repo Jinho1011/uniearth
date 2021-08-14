@@ -15,6 +15,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
   const [topic, setTopic] = useState("false");
   const [files, setFiles] = useState([]);
   const [fillout, setFillout] = useState("");
+  const [fileCount, setFileCount] = useState(0);
 
   const setLocation = () => {
     if (!navigator.geolocation) {
@@ -66,6 +67,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
 
   const closeModal = () => {
     setFiles([]);
+    setFileCount(0);
     setShowModal(false);
   };
 
@@ -198,9 +200,9 @@ const Writer = ({ showModal, setShowModal, token }) => {
             </div>
             <p>오늘 먹은(먹을) 점심은?</p>
           </div>
-
+          
           <p id="attachmentsHeader">첨부항목</p>
-          <Dropzone files={files} setFiles={setFiles} />
+          <Dropzone files={files} setFiles={setFiles} fileCount={fileCount} setFileCount={setFileCount}/>
           <p id="fillout_header">작성란</p>
           <div id="fillout">
             <form>

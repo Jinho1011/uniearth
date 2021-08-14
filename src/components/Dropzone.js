@@ -22,15 +22,12 @@ const img = {
   width: "144px",
 };
 
-const onHoverThumb = (e) => {
-  // console.log(e.target);
+const onClickThumb = (e) => {
+  console.log(e.target);
 };
 
-let fileCount = Number(0);
-
-function Dropzone({ files, setFiles }) {
+function Dropzone({ files, setFiles, fileCount, setFileCount }) {
   const zoneRef = useRef(null);
-
   const removeDropzone = () => {
     zoneRef.current.style.display = "none";
     console.log(zoneRef.current);
@@ -59,7 +56,7 @@ function Dropzone({ files, setFiles }) {
             Object.assign(file, {
               preview: URL.createObjectURL(file),
             }),
-          (fileCount = fileCount + 1),
+          setFileCount(fileCount+1),
         ),
       ]);
     },
@@ -69,7 +66,7 @@ function Dropzone({ files, setFiles }) {
     return (
       <div className="thumb" key={file[0].name}>
         <div style={thumbInner}>
-          <img src={file[0].preview} style={img} onMouseOver={onHoverThumb} />
+          <img src={file[0].preview} style={img} onClick={onClickThumb} />
         </div>
       </div>
     );

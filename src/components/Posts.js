@@ -58,10 +58,6 @@ const Posts = ({ token, coord }) => {
         .slice(0)
         .reverse()
         .map((post) => {
-          console.log(
-            "🚀 ~ file: Posts.js ~ line 57 ~ {posts.map ~ post",
-            post
-          );
           return <Post post={post} key={post.SEQ}></Post>;
         })}
     </div>

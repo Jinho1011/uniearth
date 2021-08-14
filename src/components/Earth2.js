@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import Globe from "react-globe.gl";
-import { RGBA_ASTC_10x6_Format } from "three";
 
 const Earth = ({ setCoord, setTime }) => {
   const globeEl = useRef();
@@ -9,6 +8,7 @@ const Earth = ({ setCoord, setTime }) => {
   let scene = null;
   let canvas = null;
   let controls = null;
+
   useEffect(() => {
     canvas = globeEl.current;
     scene = canvas.scene();
@@ -18,11 +18,14 @@ const Earth = ({ setCoord, setTime }) => {
     controls.enableZoom = false;
     controls.enablePan = false;
     camera.position.set(2.14313, 2.14313, 240);
+    setTime({
+      hours: today.getHours(),
+      minutes: today.getMinutes(),
+    });
   }, []);
 
   var today = new Date();
-  // console.log(today.getHours());
-  // console.log(today.getMinutes());
+
   const initEarth = () => {};
   const clickEvent = (e) => {
     setCoord({
