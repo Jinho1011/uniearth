@@ -16,6 +16,8 @@ const Writer = ({ showModal, setShowModal, token }) => {
 
 
   const closeModal = () => {
+    setFiles([]);
+
     setShowModal(false);
   };
 

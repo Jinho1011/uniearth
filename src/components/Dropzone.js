@@ -37,6 +37,7 @@ function Dropzone({ files, setFiles }) {
   //const [images, setImages] = useState([]);
   //const [fileCount, setFileCount] = useState(Number('0'));
   //const [files, setFiles] = useState([]);
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
@@ -50,8 +51,7 @@ function Dropzone({ files, setFiles }) {
             Object.assign(file, {
               preview: URL.createObjectURL(file),
             }),
-          (fileCount = fileCount + 1)
-          //console.log(fileCount)
+          (fileCount = fileCount + 1),
         ),
       ]);
     },
