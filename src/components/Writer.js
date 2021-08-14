@@ -1,44 +1,142 @@
 import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-modal";
 import Dropzone from "./Dropzone";
-import "../styles/Writer.css";
 import Axios from "axios";
+import jwt_decode from "jwt-decode";
+
+import "../styles/Writer.css";
 
 Modal.setAppElement(document.getElementById("root"));
 
 const Writer = ({ showModal, setShowModal, token }) => {
-  const inputRef = useRef(null);
-
+  const [address, setAddress] = useState([]);
+  const [coord, setCoord] = useState({});
+  const [user, setUser] = useState({});
   const [topic, setTopic] = useState("false");
-  //const [keyword, setKeyword] = useState("");
   const [files, setFiles] = useState([]);
   const [fillout, setFillout] = useState("");
 
-  // useEffect(() => {
-  //   console.log(fillout);
-  // }, [fillout]);
+  const setLocation = () => {
+    if (!navigator.geolocation) {
+      console.log("사용자의 브라우저는 지오로케이션을 지원하지 않습니다.");
+      return;
+    }
+
+    function success(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+      setCoord({
+        lat: latitude,
+        lng: longitude,
+      });
+
+      var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}8&sensor=false&key=AIzaSyBR8RbKAXpP4kTkcQVBm_2E5jU19lb9LYo`,
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => {
+          let res = JSON.parse(result).results[0];
+          let address_comps = res.address_components;
+
+          address_comps.map((comp) => {
+            if (comp.types.includes("country")) {
+              setAddress((oldArray) => [...oldArray, comp.long_name]);
+            } else if (comp.types.includes("administrative_area_level_1")) {
+              setAddress((oldArray) => [...oldArray, comp.long_name]);
+            }
+          });
+        })
+        .catch((error) => console.log("error", error));
+    }
+    function error() {
+      setAddress(["경기도", "대한민국"]);
+      setCoord({ lat: 27, lng: 127 });
+      console.log("사용자의 위치를 찾을 수 없습니다.");
+    }
+    console.log("Locating…");
+    navigator.geolocation.getCurrentPosition(success, error);
+  };
 
   const closeModal = () => {
     setShowModal(false);
   };
 
-  const submit = () => {
-    console.log({topic});
-    console.log({files});
-    console.log({fillout});
+  const createPost = () => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "Authorization",
+      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
+    myHeaders.append("Content-Type", "application/json");
 
-    // Axios.post(
-    //   "/uniearth/topics",
-    //   {
-    //     topic,
-    //   },
-    //   {
-    //     "content-type": "application/json;charset=utf-8;",
-    //   }
-    // ).then((res) => {
-    //   console.log(res);
-    // });
+    var raw = JSON.stringify({
+      post_title: "제목",
+      post_info: fillout,
+      post_topic: 1,
+      post_owner: user.useremail,
+      post_latitude: coord.lat,
+      post_longitude: coord.lng,
+      post_country: address[1],
+    });
 
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    return fetch("/uniearth/posts", requestOptions)
+      .then((response) => response.text())
+      .then((result) => JSON.parse(result))
+      .catch((error) => console.log("error", error));
+  };
+
+  const uploadFile = (file) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "multipart/form-data");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
+
+    var formdata = new FormData();
+    formdata.append("form-file", "");
+    formdata.append("post_files.upload", "");
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://uniearth.api.dev-whoan.xyz:58443/ftp/execute",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
+
+  const submit = async () => {
+    let res = await createPost();
+    console.log("🚀 ~ file: Writer.js ~ line 102 ~ submit ~ res", res);
+    if (files.length) {
+      // 파일이 있는 경우
+      files.map((file) => {
+        console.log(file);
+        uploadFile(file);
+      });
+    }
     closeModal();
   };
 
@@ -50,13 +148,20 @@ const Writer = ({ showModal, setShowModal, token }) => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(files)
-  // }, [files])
-
   const onChangeFillout = (e) => {
     setFillout(e.target.value);
   };
+
+  useEffect(() => {
+    setLocation();
+  }, []);
+
+  useEffect(() => {
+    if (typeof token === "string") {
+      let userInfo = jwt_decode(token);
+      setUser(userInfo);
+    }
+  }, [token]);
 
   return (
     <Modal
@@ -69,28 +174,24 @@ const Writer = ({ showModal, setShowModal, token }) => {
         <header>
           <img src={process.env.PUBLIC_URL + "/images/profileImg.png"}></img>
           <div>
-            <h4>닉네임</h4>
-            <p>대한민국 8월 8일 오전 10:00</p>
+            <h4>{user?.usernickname}</h4>
+            <p>{user?.useremail}</p>
           </div>
         </header>
         <main>
           <p id="topicHeader">주제선택</p>
           <div id="topic">
-            {/* <div className="topicCategory">
+            <div className="round">
               <input
                 type="checkbox"
-                id="topic"
+                id="checkbox"
                 name="topic"
                 value="false"
                 onChange={onChangeTopic}
               />
-              <label for="topic">오늘 먹은(먹을) 점심은?</label>
-            </div> */}
-            <div className="round">
-              <input type="checkbox" id="checkbox" name="topic" value="false" onChange={onChangeTopic} />
-              <label for="checkbox"></label>
+              <label htmlFor="checkbox"></label>
             </div>
-            <p >오늘 먹은(먹을) 점심은?</p>
+            <p>오늘 먹은(먹을) 점심은?</p>
           </div>
 
           <p id="attachmentsHeader">첨부항목</p>
