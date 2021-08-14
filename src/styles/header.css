@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.navs {
+  display: felx;
+  justify-content: space-between;
+}
+
+.nav .nav-link {
+  font-size: 1.2rem;
+  color: #fff;
+  padding-bottom: 2px;
+  transition: 0.1s;
+}
+
+.nav .nav-link:hover {
+  border-bottom: 2px solid #fff;
+}
