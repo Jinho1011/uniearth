@@ -97,6 +97,7 @@
 }
 .writerModal section main #attachments div p {
     margin: 0;
+    display: flex;
 }
 
 .writerModal section main .container {
@@ -126,6 +127,7 @@
     margin: 2px 2px 2px 2px;
     border: 1px solid #000000;
     border-radius: 20px;
+    
 }
 
 .writerModal section main .container .dropzone img{
@@ -135,8 +137,7 @@
 }
 
 .writerModal section main .container .dropzone p{
-    margin: 0;
-    text-align: center;
+    margin:0 auto 32px auto;
 }
 
 .writerModal section main #fillout_header {
