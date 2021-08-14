@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
 
 import { Background } from "../components/Background";
 import Earth from "../components/Earth2";
 import Writer from "../components/Writer";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
+import Posts from "../components/Posts";
 import "../styles/Feed.css";
 
 const Feed = () => {
@@ -19,7 +19,7 @@ const Feed = () => {
   }, []);
 
   useEffect(() => {
-    console.log(coord);
+    // console.log(coord);
   }, [coord]);
 
   return (
@@ -34,6 +34,7 @@ const Feed = () => {
       </div>
       <Menu setShowModal={setShowModal}></Menu>
       <Writer showModal={showModal} setShowModal={setShowModal} token={token} />
+      <Posts token={token} coord={coord}></Posts>
     </Background>
   );
 };
