@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Globe from "react-globe.gl";
+import { RGBA_ASTC_10x6_Format } from "three";
 
 const Earth = ({ setCoord, setTime }) => {
   const globeEl = useRef();
@@ -23,7 +24,6 @@ const Earth = ({ setCoord, setTime }) => {
   // console.log(today.getHours());
   // console.log(today.getMinutes());
   const initEarth = () => {};
-
   const clickEvent = (e) => {
     setCoord({
       lat: Math.round(e.lat),
