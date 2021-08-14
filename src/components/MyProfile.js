@@ -10,6 +10,7 @@ const MyProfile = ({ user }) => {
   const [text, setText] = useState("잘못된 비밀번호입니다");
   const [over2, setOver2] = useState(false);
   const [address, setAddress] = useState([]);
+  const [phone, setPhone] = useState("");
   const [newNick, setNewNick] = useState("");
 
   const pwCheck = () => {
@@ -80,6 +81,38 @@ const MyProfile = ({ user }) => {
   useEffect(() => {
     console.log(address);
   }, [address]);
+
+  const initPhone = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    return fetch(
+      "/uniearth/users/uniearth_user_id/" + user?.useremail,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => JSON.parse(result))
+      .catch((error) => console.log("error", error));
+  };
+
+  useEffect(() => {
+    const init = async () => {
+      let res = await initPhone();
+      let phone = res.users[0].uniearth_user_phone;
+      setPhone(phone);
+    };
+    init();
+  }, []);
 
   return (
     <div className="profile">
@@ -164,11 +197,7 @@ const MyProfile = ({ user }) => {
           </div>
           <div className="profile_phone">
             <div className="profile_title">연락처</div>
-            <input
-              type="text"
-              className="profile_set"
-              defaultValue="010-1234-5678"
-            />
+            <input type="text" className="profile_set" defaultValue={phone} />
           </div>
           <div className="profile_sex">
             <div className="profile_title">성별</div>
