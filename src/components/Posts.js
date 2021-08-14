@@ -69,15 +69,17 @@ const Posts = ({ token, coord, refresh, setRefresh }) => {
         .slice(0)
         .reverse()
         .map((post) => {
-          return (
-            <Post
-              user={user}
-              post={post}
-              key={post.SEQ}
-              refresh={refresh}
-              setRefresh={setRefresh}
-            ></Post>
-          );
+          let diff = coord.lng - post.post_longitude;
+          if (-10 < diff < 10)
+            return (
+              <Post
+                user={user}
+                post={post}
+                key={post.SEQ}
+                refresh={refresh}
+                setRefresh={setRefresh}
+              ></Post>
+            );
         })}
     </div>
   );

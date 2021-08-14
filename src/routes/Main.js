@@ -13,7 +13,11 @@ const Main = () => {
       <Header></Header>
       <div
         className="container is-max-desktop"
-        style={{ display: "flex", justifyContent: "space-between" }}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          paddingTop: 180,
+        }}
       >
         <div className="picture-item">
           <img
