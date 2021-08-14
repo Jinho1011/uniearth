@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-modal";
 import Dropzone from "./Dropzone";
 import "../styles/Writer.css";
-import Axios from 'axios';
+import Axios from "axios";
 
 Modal.setAppElement(document.getElementById("root"));
 
@@ -28,17 +28,16 @@ const Writer = ({ showModal, setShowModal }) => {
     // console.log({fillout});
 
     Axios.post(
-      '/uniearth/topic',
+      "/uniearth/topics",
       {
-        topic
+        topic,
       },
       {
-        "content-type": "application/json;charset=utf-8;"
+        "content-type": "application/json;charset=utf-8;",
       }
-    ).then( (res) => {
+    ).then((res) => {
       console.log(res);
-    })
-    
+    });
 
     closeModal();
   };
@@ -46,7 +45,7 @@ const Writer = ({ showModal, setShowModal }) => {
   const onChangeTopic = (e) => {
     if (e.target.checked) {
       setTopic(e.target.value);
-    }else{
+    } else {
       setTopic("false");
     }
   };
@@ -94,7 +93,12 @@ const Writer = ({ showModal, setShowModal }) => {
           <div id="fillout">
             <form>
               <p>
-                <textarea cols="100" rows="4" onChange={onChangeFillout} maxLength="200"></textarea>
+                <textarea
+                  cols="100"
+                  rows="4"
+                  onChange={onChangeFillout}
+                  maxLength="200"
+                ></textarea>
               </p>
             </form>
           </div>
