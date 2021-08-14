@@ -11,15 +11,15 @@ const Earth = () => {
     cameraMinPolarAngle: (Math.PI * 7) / 16,
   });
   const [focus, setFocus] = useState(null);
-  const [coordinates, setCoordinates] = useState([1, 3]);
-  const [globe, setGlobe] = useState(null);
+  const [coordinates, setCoordinates] = useState([0, 0]);
+  // const [globe, setGlobe] = useState(null);
+  const cities = require("./cities.json");
   function checkpoint() {
     setOptions(false, 0, 0);
-    console.log(globe);
   }
-  useEffect(() => {
-    console.log(globe);
-  }, globe);
+  // useEffect(() => {
+  //   console.log("globe" + globe);
+  // }, globe);
   return (
     <>
       <text>coordinates</text>
@@ -32,7 +32,7 @@ const Earth = () => {
           globeTexture={process.env.PUBLIC_URL + "/images/globe.png"}
           globeBackgroundTexture="null"
           focus={focus}
-          onGetGlobe={setGlobe}
+          // onGetGlobe={setGlobe}
         />
       </div>
     </>
