@@ -4,5 +4,9 @@
   justify-content: space-between;
   align-items: center;
 }
-.title {
+.picture-item {
+  margin-right: 30px;
+}
+.logo {
+  margin-bottom: 30px;
 }
