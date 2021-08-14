@@ -8,6 +8,7 @@
 
 .form-wrapper {
   width: 480px;
+  padding-bottom: 70px;
 }
 
 .form-title {
@@ -85,11 +86,14 @@
 
 .form-select-container {
   display: flex;
-  gap: 30px;
+  gap: 20px;
 }
 
 .round {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .round label {
@@ -129,4 +133,16 @@
 
 .round input[type="checkbox"]:checked + label:after {
   opacity: 1;
+}
+
+.form-etc > a {
+  color: #fff;
+}
+
+.form-etc > a:hover {
+  color: #ccc;
+}
+
+input.password {
+  color: #fff;
 }
