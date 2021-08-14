@@ -6,7 +6,7 @@ import Axios from "axios";
 
 Modal.setAppElement(document.getElementById("root"));
 
-const Writer = ({ showModal, setShowModal }) => {
+const Writer = ({ showModal, setShowModal, token }) => {
   const inputRef = useRef(null);
 
   const [topic, setTopic] = useState("false");

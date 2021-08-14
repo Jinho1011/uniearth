@@ -9,15 +9,17 @@ const Earth = () => {
   let canvas = null;
   let controls = null;
   useEffect(() => {
-    setTimeout(() => {
-      canvas = globeEl.current;
-      scene = canvas.scene();
-      camera = canvas.camera();
-      earth = scene.children[3];
-      controls = canvas.controls();
-    }, 1000);
-    camera = globeEl.current.camera();
+    canvas = globeEl.current;
+    scene = canvas.scene();
+    camera = canvas.camera();
+    earth = scene.children[3];
+    controls = canvas.controls();
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    camera.position.set(2.14313, 2.14313, 240);
   }, []);
+
+  const initEarth = () => {};
 
   const clickEvent = (lat, lng) => {
     console.log(lat, lng);
@@ -26,11 +28,14 @@ const Earth = () => {
   return (
     <Globe
       ref={globeEl}
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+      width={360}
+      height={360}
+      globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
       pointAltitude="size"
       pointColor="color"
       animateIn={false}
       onGlobeClick={clickEvent} //(lat, lng) => console.log(lat, lng)}
+      onGlobeReady={initEarth}
     />
   );
 };

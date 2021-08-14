@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 
 import { Background } from "../components/Background";
-import Earth from "../components/Earth";
+import Earth from "../components/Earth2";
 import Writer from "../components/Writer";
 import Header from "../components/Header";
 
