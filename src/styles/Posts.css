@@ -84,8 +84,18 @@
 }
 
 .comments {
+}
+
+.comment {
   display: flex;
-  background-color: #333333;
+  gap: 8px;
+}
+
+.comment-owner {
+  font-weight: bold;
+}
+
+.comment-text {
 }
 
 .comment-input {
@@ -106,6 +116,6 @@
 .input-container a {
   font-size: 0.8rem;
   position: absolute;
-  padding-top: 12px;
-  padding-left: 200px;
+  margin-top: 13px;
+  margin-left: 200px;
 }

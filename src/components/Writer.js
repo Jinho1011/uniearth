@@ -8,7 +8,7 @@ import "../styles/Writer.css";
 
 Modal.setAppElement(document.getElementById("root"));
 
-const Writer = ({ showModal, setShowModal, token }) => {
+const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
   const [address, setAddress] = useState([]);
   const [coord, setCoord] = useState({});
   const [user, setUser] = useState({});
@@ -144,6 +144,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
         uploadFile(file);
       });
     }
+    setRefresh(true);
     closeModal();
   };
 
@@ -200,9 +201,14 @@ const Writer = ({ showModal, setShowModal, token }) => {
             </div>
             <p>오늘 먹은(먹을) 점심은?</p>
           </div>
-          
+
           <p id="attachmentsHeader">첨부항목</p>
-          <Dropzone files={files} setFiles={setFiles} fileCount={fileCount} setFileCount={setFileCount}/>
+          <Dropzone
+            files={files}
+            setFiles={setFiles}
+            fileCount={fileCount}
+            setFileCount={setFileCount}
+          />
           <p id="fillout_header">작성란</p>
           <div id="fillout">
             <form>

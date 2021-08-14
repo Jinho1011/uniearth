@@ -7,7 +7,6 @@ import Header from "../components/Header";
 import Menu from "../components/Menu";
 import Posts from "../components/Posts";
 import "../styles/Feed.css";
-import { EqualStencilFunc } from "three";
 
 const Feed = () => {
   const [token, setToken] = useState({});
@@ -17,8 +16,8 @@ const Feed = () => {
   });
   const [showModal, setShowModal] = useState(false);
   const [time, setTime] = useState({});
-  const [selected, setSelected] = useState({});
   const [continents, setContinents] = useState([]);
+  const [refresh, setRefresh] = useState(false);
   const c = [
     { name: "아시아", range: [24, 127] },
     { name: "유럽", range: [-10, 40] },
@@ -66,10 +65,20 @@ const Feed = () => {
         <Earth setCoord={setCoord} setTime={setTime}></Earth>
       </div>
       <Menu setShowModal={setShowModal} continents={continents}></Menu>
-      <Writer showModal={showModal} setShowModal={setShowModal} token={token} />
+      <Writer
+        showModal={showModal}
+        setShowModal={setShowModal}
+        token={token}
+        setRefresh={setRefresh}
+      />
 
       <div className="container is-max-desktop ">
-        <Posts token={token} coord={coord}></Posts>
+        <Posts
+          token={token}
+          coord={coord}
+          refresh={refresh}
+          setRefresh={setRefresh}
+        ></Posts>
       </div>
     </Background>
   );

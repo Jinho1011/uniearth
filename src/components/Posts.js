@@ -5,7 +5,7 @@ import "bulma/css/bulma.min.css";
 import "../styles/Posts.css";
 import Post from "./Post";
 
-const Posts = ({ token, coord }) => {
+const Posts = ({ token, coord, refresh, setRefresh }) => {
   const [user, setUser] = useState({});
   const [posts, setPosts] = useState([]);
 
@@ -52,13 +52,30 @@ const Posts = ({ token, coord }) => {
     init();
   }, []);
 
+  useEffect(() => {
+    const init = async () => {
+      let res = await getPosts();
+      res = JSON.parse(res);
+      setPosts(res.posts);
+    };
+    init();
+  }, [refresh]);
+
   return (
     <div className="posts-container">
       {posts
         .slice(0)
         .reverse()
         .map((post) => {
-          return <Post post={post} key={post.SEQ}></Post>;
+          return (
+            <Post
+              user={user}
+              post={post}
+              key={post.SEQ}
+              refresh={refresh}
+              setRefresh={setRefresh}
+            ></Post>
+          );
         })}
     </div>
   );
