@@ -14,9 +14,6 @@ const Writer = ({ showModal, setShowModal, token }) => {
   const [files, setFiles] = useState([]);
   const [fillout, setFillout] = useState("");
 
-  // useEffect(() => {
-  //   console.log(fillout);
-  // }, [fillout]);
 
   const closeModal = () => {
     setShowModal(false);
