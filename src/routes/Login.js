@@ -88,7 +88,7 @@ const Login = () => {
             <div className="form-select-container">
               <div className="round">
                 <input type="checkbox" id="checkbox" />
-                <label for="checkbox"></label>
+                <label htmlFor="checkbox"></label>
               </div>
               <div style={{ color: "#fff" }}>자동 로그인</div>
             </div>
