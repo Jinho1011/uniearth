@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 
 const thumbsContainer = {
@@ -18,56 +18,69 @@ const img = {
   display: "block",
   width: "auto",
   height: "144px",
-  width: "144px"
+  width: "144px",
 };
 
 const onHoverThumb = (e) => {
-  console.log(e.target);
+  // console.log(e.target);
 };
 
-function Dropzone({files, setFiles}) {
-  const [images, setImages] = useState([]);
-  const [fileCount, setFileCount] = useState(Number('0'));
+let fileCount = Number(0);
+
+function Dropzone({ files, setFiles }) {
+  const zoneRef = useRef(null);
+
+  const removeDropzone = () => {
+    zoneRef.current.style.display = "none";
+    console.log(zoneRef.current);
+  };
+  //const [images, setImages] = useState([]);
+  //const [fileCount, setFileCount] = useState(Number('0'));
   //const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
+      if (fileCount >= 6) {
+        removeDropzone();
+      }
       setFiles([
         ...files,
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          }),
-          setFileCount(Number(fileCount+1)),
-          console.log(fileCount)
+        acceptedFiles.map(
+          (file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            }),
+          (fileCount = fileCount + 1)
+          //console.log(fileCount)
         ),
       ]);
     },
   });
 
   const thumbs = files.map((file) => {
-    
-    return(
-      <div className="thumb" key={file.name} >
+    return (
+      <div className="thumb" key={file.name}>
         <div style={thumbInner}>
-          <img src={file[0].preview} style={img}  onMouseOver={onHoverThumb}/>
+          <img src={file[0].preview} style={img} onMouseOver={onHoverThumb} />
         </div>
       </div>
-    )
+    );
   });
 
   useEffect(() => {
     files.forEach((file) => URL.revokeObjectURL(file.preview));
-  },[files]);
+  }, [files]);
 
   return (
     <section className="container">
       {/* <Thumbs style={thumbsContainer}></Thumbs> */}
-      <div style={thumbsContainer}>{thumbs}</div>
-      <div {...getRootProps({ className: "dropzone" })} >
+      {thumbs}
+      <div {...getRootProps({ className: "dropzone" })} ref={zoneRef}>
         <input {...getInputProps()} />
-        <img src={process.env.PUBLIC_URL + "/images/plus.png"} />
-        <p>사진/동영상</p>
+        <div style={thumbsContainer}>
+          <img src={process.env.PUBLIC_URL + "/images/plus.png"} />
+          <p>사진/동영상</p>
+        </div>
       </div>
     </section>
   );

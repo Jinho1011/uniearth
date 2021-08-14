@@ -1,0 +1,32 @@
+.menu {
+  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.menu-button {
+  background-color: #171d36;
+  padding: 8px 10px;
+  border-radius: 20px;
+  border: 2px solid #fff;
+  font-family: NanumSquare;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 20px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: 0.1s;
+}
+
+.menu-button:hover {
+  transform: scale(1.01);
+  background-color: #fff;
+  color: #182141;
+}
