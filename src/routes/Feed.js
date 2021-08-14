@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import Writer from "../components/Writer";
+
 const Feed = () => {
   const [showModal, setShowModal] = useState(false);
 
