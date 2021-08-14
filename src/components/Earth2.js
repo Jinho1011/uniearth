@@ -22,10 +22,7 @@ const Earth = ({ setCoord }) => {
   const initEarth = () => {};
 
   const clickEvent = (lat, lng) => {
-    setCoord({
-      lat: lat,
-      lng: lng,
-    });
+    // console.log(lat, lng);
   };
 
   return (

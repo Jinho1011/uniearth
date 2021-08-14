@@ -25,6 +25,10 @@ const Feed = () => {
     <Background>
       <Header></Header>
       <div className="container earth-container">
+        <div className="info-container">
+          <div className="time-info"></div>
+          <div className="lng-info">{coord.lng}</div>
+        </div>
         <Earth setCoord={setCoord}></Earth>
       </div>
       <button onClick={() => setShowModal(true)}>글쓰기</button>
