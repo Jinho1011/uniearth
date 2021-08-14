@@ -1,0 +1,20 @@
+.myposts {
+    font-family: 'NanumSquare', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 200px;
+    width: 1280px;
+    background-color: #FAFAFA;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.myposts_top {
+    font-size: 18px;
+    font-weight: bold;
+    color: #B6B6B6;
+    
+    padding-left: 74px;
+    margin-bottom: 50px;
+}

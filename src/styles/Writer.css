@@ -1,4 +1,4 @@
-.modal {
+.writerModal {
     position: fixed;
     top: 0;
     right: 0;
@@ -7,12 +7,12 @@
     z-index: 99;
     background-color: rgba(0, 0, 0, 0.8);
 }
-.modal button {
+.writerModal button {
     outline: none;
     cursor: pointer;
     border: 0;
 }
-.modal section {
+.writerModal section {
     width: 1280px;
     height: 869px;
     margin:40px auto 0 auto;
@@ -21,7 +21,7 @@
     overflow: hidden;
     position: relative;
 }
-.modal section header {
+.writerModal section header {
     position: absolute;
     top: 50px;
     left: 74px;
@@ -29,26 +29,26 @@
     padding: 0;
     display: flex;
 }
-.modal section header img {
+.writerModal section header img {
     width: 50px;
     height: 50px;
 }
-.modal section header div {
+.writerModal section header div {
     height: 50px;
     margin: 0 0 0 20px;
 }
-.modal section header div h4 {
+.writerModal section header div h4 {
     font-weight: bold;
     font-size: 18px;
     padding: 0;
     margin: 0;
 }
-.modal section header div p {
+/* .writerModal section header div p {
     font-size: 14px;
     padding: 0;
     margin: 2px 0 0 0;
-}
-.modal section main {
+} */
+.writerModal section main {
     position: absolute;
     top: 150px;
     left: 72px;
@@ -57,30 +57,30 @@
     height: 565px;
     font-size: 18px;
 }
-.modal section main #topic_header {
+.writerModal section main #topic_header {
     color: #B6B6B6;
     font-weight: bold;
 }
-.modal section main .topic_category {
+.writerModal section main .topic_category {
     display: flex;
     height: 35px;
     line-height: 0px;
     font-weight: bold;
 }
-.modal section main label {
+.writerModal section main label {
     margin: auto 37px;
     color: #333333;
     font-weight: normal;
 }
-.modal section main #attachments{
+.writerModal section main #attachments{
     display: flex;
 }
-.modal section main #attachments_header {
+.writerModal section main #attachments_header {
     display: block;
     color: #B6B6B6;
     font-weight: bold;
 }
-.modal section main #attachments div {
+.writerModal section main #attachments div {
     width: 144px;
     height: 144px;
     border: 1px solid #B6B6B6;
@@ -90,26 +90,26 @@
     text-align: center;
     margin: 0 30px 0 0;
 }
-.modal section main #attachments div img {
+.writerModal section main #attachments div img {
     margin: 32px auto 20px auto;
     width: 40px;
     height: 40px;
 }
-.modal section main #attachments div p {
+.writerModal section main #attachments div p {
     margin: 0;
 }
 
-.modal section main .container {
+.writerModal section main .container {
     margin: 0;
     height: 180px;
     width: 1128px;
 }
 
-.modal section main .container{
+.writerModal section main .container{
     display: flex;
 }
 
-.modal section main .container .thumb{
+.writerModal section main .container .thumb{
     display: flex;
     width: 152px;
     height: 152px;
@@ -118,7 +118,7 @@
     border-radius: 15px;
 };
 
-.modal section main .container .dropzone{
+.writerModal section main .container .dropzone{
     display: flex;
     width: 152px;
     height: 152px;
@@ -126,28 +126,28 @@
     border-radius: 15px;
 }
 
-.modal section main .container .dropzone img{
+.writerModal section main .container .dropzone img{
     width: 40px;
     margin: 32px 52px 20px 52px;
 }
 
-.modal section main .container .dropzone p{
+.writerModal section main .container .dropzone p{
     margin: 0;
     text-align: center;
 }
 
-.modal section main #fillout_header {
+.writerModal section main #fillout_header {
     display: block;
     color: #B6B6B6;
     font-weight: bold;
 }
-.modal section main #fillout {
+.writerModal section main #fillout {
     width: 1128px;
     height: 156px;
     border: 1px solid #B6B6B6;
     border-radius: 20px;
 }
-.modal section main #fillout textarea {
+.writerModal section main #fillout textarea {
     resize: none;
     width: 1064px;
     height: 96px;
@@ -156,11 +156,11 @@
     border: none;
     font-size: 18px
 }
-.modal section main #fillout textarea:focus {
+.writerModal section main #fillout textarea:focus {
     outline: none;
 }
 
-.modal section footer {
+.writerModal section footer {
     position: absolute;
     width: 187px;
     height: 54px;
@@ -169,7 +169,7 @@
     padding: 0px;
     text-align: right;
 }
-.modal section footer button {
+.writerModal section footer button {
     position: absolute;
     width: 70px;
     height: 54px;
@@ -178,20 +178,20 @@
     border-radius: 20px;
     font-size: 20px;
 }
-.modal section footer #cancel{
+.writerModal section footer #cancel{
     left: 0;
     background-color: #B6B6B6;
 }
-.modal section footer #submit{
+.writerModal section footer #submit{
     right: 0;
     background-color: #4E89FF;
 }
-/* .modal.open.modal {
+/* .writerModal.open.writerModal {
     display: flex;
     align-items: center;
-    animation: .modal-bg-show .3s;
+    animation: .writerModal-bg-show .3s;
 }
-@keyframes .modal-show {
+@keyframes .writerModal-show {
     from {
         opacity: 0;
         margin-top: -50px;
@@ -201,7 +201,7 @@
         margin-top: 0;
     }
 }
-@keyframes .modal-bg-show {
+@keyframes .writerModal-bg-show {
     from {
         opacity: 0;
     }

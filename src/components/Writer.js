@@ -2,34 +2,57 @@ import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-modal";
 import Dropzone from "./Dropzone";
 import "../styles/Writer.css";
+import Axios from "axios";
 
 Modal.setAppElement(document.getElementById("root"));
 
 const Writer = ({ showModal, setShowModal }) => {
   const inputRef = useRef(null);
 
-  const [topic, setTopic] = useState("");
-  const [keyword, setKeyword] = useState("");
+  const [topic, setTopic] = useState("false");
+  //const [keyword, setKeyword] = useState("");
   const [files, setFiles] = useState([]);
   const [fillout, setFillout] = useState("");
 
-  useEffect(() => {
-    console.log(fillout);
-  }, [fillout]);
+  // useEffect(() => {
+  //   console.log(fillout);
+  // }, [fillout]);
 
   const closeModal = () => {
     setShowModal(false);
   };
 
   const submit = () => {
+    // console.log({topic});
+    // console.log({files});
+    // console.log({fillout});
+
+    Axios.post(
+      "/uniearth/topics",
+      {
+        topic,
+      },
+      {
+        "content-type": "application/json;charset=utf-8;",
+      }
+    ).then((res) => {
+      console.log(res);
+    });
+
     closeModal();
   };
 
   const onChangeTopic = (e) => {
     if (e.target.checked) {
       setTopic(e.target.value);
+    } else {
+      setTopic("false");
     }
   };
+
+  // useEffect(() => {
+  //   console.log(files)
+  // }, [files])
 
   const onChangeFillout = (e) => {
     setFillout(e.target.value);
@@ -40,7 +63,7 @@ const Writer = ({ showModal, setShowModal }) => {
       isOpen={showModal}
       onRequestClose={closeModal}
       contentLabel="Example Modal"
-      className="modal"
+      className="writerModal"
     >
       <section>
         <header>
@@ -54,20 +77,18 @@ const Writer = ({ showModal, setShowModal }) => {
           <p id="topic_header">주제선택</p>
           <div id="topic">
             <div className="topic_category">
-              <p>오늘의 주제</p>
-
               <input
                 type="checkbox"
                 id="topic"
                 name="topic"
-                value="isTrue"
+                value="true"
                 onChange={onChangeTopic}
               />
               <label for="topic">오늘 먹은(먹을) 점심은?</label>
             </div>
           </div>
           <p id="attachments_header">첨부항목</p>
-          <Dropzone />
+          <Dropzone files={files} setFiles={setFiles} />
           <p id="fillout_header">작성란</p>
           <div id="fillout">
             <form>
@@ -76,7 +97,7 @@ const Writer = ({ showModal, setShowModal }) => {
                   cols="100"
                   rows="4"
                   onChange={onChangeFillout}
-                  maxLength="100"
+                  maxLength="200"
                 ></textarea>
               </p>
             </form>
@@ -86,7 +107,7 @@ const Writer = ({ showModal, setShowModal }) => {
           <button id="cancel" onClick={closeModal}>
             취소
           </button>
-          <button id="submit" onClick={closeModal}>
+          <button id="submit" onClick={submit}>
             확인
           </button>
         </footer>

@@ -3,6 +3,11 @@ import { Redirect } from "react-router-dom";
 import { sha256 } from "js-sha256";
 import jwt_decode from "jwt-decode";
 
+import { Background } from "../components/Background";
+import Header from "../components/Header";
+import "../styles/form.css";
+import styled from "styled-components";
+
 const Login = () => {
   const [isDone, setDone] = useState(false);
   const [inputs, setInputs] = useState({
@@ -59,19 +64,46 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h1>Login</h1>
-      <div>
-        아이디
-        <input name="id" onChange={onChange} value={inputs.id}></input>
-      </div>
-      <div>
-        비밀번호
-        <input name="pwd" onChange={onChange} value={inputs.pwd}></input>
+    <Background>
+      <Header></Header>
+      <div className="form-container">
+        <div className="form-wrapper">
+          <h1 className="form-title">Sign In</h1>
+          <div className="input-container">
+            <input
+              name="id"
+              className="form-input"
+              placeholder="이메일을 입력해주세요"
+              onChange={onChange}
+              value={inputs.id}
+            ></input>
+            <input
+              type="password"
+              name="pwd"
+              className="form-input"
+              placeholder="비밀번호를 입력해주세요"
+              onChange={onChange}
+              value={inputs.pwd}
+            ></input>
+          </div>
+          <div className="form-etc">
+            <div className="form-select-container">
+              <div className="round">
+                <input type="checkbox" id="checkbox" />
+                <label for="checkbox"></label>
+              </div>
+              <div style={{ color: "#fff" }}>자동 로그인</div>
+            </div>
+            <a>비밀번호 찾기</a>
+          </div>
+
+          <button className="form-button" onClick={submit}>
+            로그인
+          </button>
+        </div>
       </div>
       {isDone ? <Redirect to="/" /> : null}
-      <button onClick={submit}>Sign Up</button>
-    </>
+    </Background>
   );
 };
 
