@@ -40,8 +40,7 @@ function Dropzone({ files, setFiles }) {
   //const [files, setFiles] = useState([]);
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*", 
-    accept: "video/*",
+    accept: "image/*" | "video/*", 
     onDrop: (acceptedFiles) => {
       if (fileCount >= 6) {
         removeDropzone();
