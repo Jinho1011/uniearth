@@ -30,7 +30,6 @@ const Feed = () => {
     setToken(JWT);
   }, []);
   useEffect(() => {
-<<<<<<< HEAD
     setContinents([]);
     c.map((a) => {
       // console.log(a.range[0]);
@@ -40,9 +39,6 @@ const Feed = () => {
     });
     console.log(continents);
     console.log(coord);
-=======
-    // console.log(coord);
->>>>>>> a3b75cfc3d653047fa2ae4f3bf144ae5474775bc
   }, [coord]);
   useEffect(() => {
     console.log(time);
