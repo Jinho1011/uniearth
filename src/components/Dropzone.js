@@ -26,39 +26,40 @@ const onHoverThumb = (e) => {
   console.log(e);
 };
 
-function Dropzone(props) {
-  const [files, setFiles] = useState([]);
+function Dropzone({files, setFiles}) {
+  const [images, setImages] = useState([]);
+  //const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      setFiles(
+      setFiles([
+        ...files,
         acceptedFiles.map((file) =>
           Object.assign(file, {
-            preview: URL.createObjectURL(file),
+            preview: URL.createObjectURL(file)
           })
-        )
-      );
+        ),
+      ]);
     },
   });
 
-  const thumbs = files.map((file) => (
-    <div className="thumb" key={file.name} onMouseOver={onHoverThumb}>
-      <div style={thumbInner}>
-        <img src={file.preview} style={img} />
+  const thumbs = files.map((file) => {
+    return(
+      <div className="thumb" key={file.name} >
+        <div style={thumbInner}>
+          <img src={file[0].preview} style={img} />
+        </div>
       </div>
-    </div>
-  ));
+    )
+  });
 
-  useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
+  useEffect(() => {
+    files.forEach((file) => URL.revokeObjectURL(file.preview));
+  },[files]);
 
   return (
     <section className="container">
+      {/* <Thumbs style={thumbsContainer}></Thumbs> */}
       <div style={thumbsContainer}>{thumbs}</div>
       <div {...getRootProps({ className: "dropzone" })}>
         <input {...getInputProps()} />
