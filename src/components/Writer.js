@@ -103,6 +103,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
   const uploadFile = (file) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "multipart/form-data");
+    myHeaders.append("Origin", "http://13.124.133.208:3000/Feed");
     myHeaders.append(
       "Authorization",
       "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
