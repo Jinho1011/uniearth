@@ -18,8 +18,7 @@ const img = {
   display: "block",
   width: "auto",
   height: "144px",
-  width: "144px",
-  margin: "4px"
+  width: "144px"
 };
 
 const onHoverThumb = (e) => {
@@ -44,10 +43,11 @@ function Dropzone({files, setFiles}) {
   });
 
   const thumbs = files.map((file) => {
+    
     return(
       <div className="thumb" key={file.name} >
         <div style={thumbInner}>
-          <img src={file[0].preview} style={img} />
+          <img src={file[0].preview} style={img}  onMouseOver={onHoverThumb}/>
         </div>
       </div>
     )
@@ -61,7 +61,7 @@ function Dropzone({files, setFiles}) {
     <section className="container">
       {/* <Thumbs style={thumbsContainer}></Thumbs> */}
       <div style={thumbsContainer}>{thumbs}</div>
-      <div {...getRootProps({ className: "dropzone" })}>
+      <div {...getRootProps({ className: "dropzone" })} >
         <input {...getInputProps()} />
         <img src={process.env.PUBLIC_URL + "/images/plus.png"} />
         <p>사진/동영상</p>
