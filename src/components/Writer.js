@@ -40,7 +40,7 @@ const Writer = ({ showModal, setShowModal }) => {
       isOpen={showModal}
       onRequestClose={closeModal}
       contentLabel="Example Modal"
-      className="modal"
+      className="writerModal"
     >
       <section>
         <header>
