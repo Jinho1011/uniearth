@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { sha256 } from "js-sha256";
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const [isDone, setDone] = useState(false);
@@ -49,11 +50,12 @@ const Login = () => {
 
     if (res.code === 200) {
       // success
-      alert("login success!");
+      let decoded = jwt_decode(res.token);
+      window.sessionStorage.setItem("JWT", decoded);
+
       setDone(true);
     } else {
       // error
-      console.log(res);
     }
   };
 
