@@ -118,7 +118,10 @@ const Writer = ({ showModal, setShowModal, token }) => {
       redirect: "follow",
     };
 
-    fetch("/ftp/execute", requestOptions)
+    fetch(
+      "https://uniearth.api.dev-whoan.xyz:58443/ftp/execute",
+      requestOptions
+    )
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
