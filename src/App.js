@@ -27,7 +27,7 @@ function App() {
         />
         <PublicRoute restricted={true} component={Login} path="/login" exact />
         <PrivateRoute component={Feed} path="/feed" exact />
-        <PrivateRoute component={Profile} path="/user/:id" exact />
+        <PrivateRoute component={Profile} path="/profile" exact />
       </Switch>
     </Router>
   );
