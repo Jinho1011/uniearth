@@ -62,11 +62,13 @@ function Dropzone({files, setFiles}) {
   return (
     <section className="container">
       {/* <Thumbs style={thumbsContainer}></Thumbs> */}
-      <div style={thumbsContainer}>{thumbs}</div>
-      <div {...getRootProps({ className: "dropzone" })} >
+      <div {...getRootProps({ className: "dropzone" })}>
         <input {...getInputProps()} />
-        <img src={process.env.PUBLIC_URL + "/images/plus.png"} />
-        <p>사진/동영상</p>
+        <div style={thumbsContainer}>
+          {thumbs}
+          <img src={process.env.PUBLIC_URL + "/images/plus.png"} />
+          <p>사진/동영상</p>
+        </div>
       </div>
     </section>
   );
