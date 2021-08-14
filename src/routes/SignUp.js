@@ -43,7 +43,7 @@ const SignUp = () => {
       redirect: "follow",
     };
 
-    return fetch("/users", requestOptions)
+    return fetch("/uniearth/users", requestOptions)
       .then((response) => response.text())
       .then((result) => result)
       .catch((error) => error);
@@ -107,10 +107,8 @@ const SignUp = () => {
         ></input>
         <label htmlFor="male">여성</label>
       </div>
-
-      {isDone ? <Redirect to="/login" /> : null}
-
       <button onClick={submit}>Sign Up</button>
+      {isDone ? <Redirect to="/login" /> : null}
     </>
   );
 };
