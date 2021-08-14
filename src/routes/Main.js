@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "bulma/css/bulma.min.css";
 import Header from "../components/Header";
-<<<<<<< HEAD
 import ReactGlobe from "react-globe";
 import "../styles/Main.css";
 const Background = styled.div`
@@ -12,9 +11,6 @@ const Background = styled.div`
   width: 100vw;
   height: 100vh;
 `;
-=======
-import { Background } from "../components/Background";
->>>>>>> e6e9e2080acde571553b4c7acb54615a842fed4a
 
 const Main = () => {
   const options = {

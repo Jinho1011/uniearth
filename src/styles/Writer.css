@@ -117,7 +117,7 @@
     margin: 2px 2px 2px 2px;
     overflow: hidden;
     border-radius: 15px;
-}
+};
 
 .writerModal section main .container .dropzone{
     display: flex;

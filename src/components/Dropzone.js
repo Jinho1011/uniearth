@@ -22,11 +22,12 @@ const img = {
 };
 
 const onHoverThumb = (e) => {
-  console.log(e);
+  console.log(e.target);
 };
 
 function Dropzone({files, setFiles}) {
   const [images, setImages] = useState([]);
+  const [fileCount, setFileCount] = useState(Number('0'));
   //const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -36,7 +37,9 @@ function Dropzone({files, setFiles}) {
         acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file)
-          })
+          }),
+          setFileCount(Number(fileCount+1)),
+          console.log(fileCount)
         ),
       ]);
     },
