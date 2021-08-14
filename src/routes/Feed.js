@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
 
 import { Background } from "../components/Background";
 import Earth from "../components/Earth2";
 import Writer from "../components/Writer";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
+import Posts from "../components/Posts";
 import "../styles/Feed.css";
 import { EqualStencilFunc } from "three";
 
@@ -30,6 +30,7 @@ const Feed = () => {
     setToken(JWT);
   }, []);
   useEffect(() => {
+<<<<<<< HEAD
     setContinents([]);
     c.map((a) => {
       // console.log(a.range[0]);
@@ -39,6 +40,9 @@ const Feed = () => {
     });
     console.log(continents);
     console.log(coord);
+=======
+    // console.log(coord);
+>>>>>>> a3b75cfc3d653047fa2ae4f3bf144ae5474775bc
   }, [coord]);
   useEffect(() => {
     console.log(time);
@@ -57,6 +61,10 @@ const Feed = () => {
       </div>
       <Menu setShowModal={setShowModal} continents={continents}></Menu>
       <Writer showModal={showModal} setShowModal={setShowModal} token={token} />
+
+      <div className="container is-max-desktop ">
+        <Posts token={token} coord={coord}></Posts>
+      </div>
     </Background>
   );
 };

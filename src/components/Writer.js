@@ -65,6 +65,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
   };
 
   const closeModal = () => {
+    setFiles([]);
     setShowModal(false);
   };
 
@@ -108,8 +109,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
     );
 
     var formdata = new FormData();
-    formdata.append("form-file", "");
-    formdata.append("post_files.upload", "");
+    formdata.append("post_files.upload", file);
 
     var requestOptions = {
       method: "POST",
@@ -117,6 +117,11 @@ const Writer = ({ showModal, setShowModal, token }) => {
       body: formdata,
       redirect: "follow",
     };
+
+    fetch("/ftp/execute", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
 
     fetch(
       "https://uniearth.api.dev-whoan.xyz:58443/ftp/execute",

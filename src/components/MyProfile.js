@@ -3,12 +3,15 @@ import React, { useState, useEffect } from "react";
 
 import "../styles/MyProfile.css";
 
-const MyProfile = () => {
+const MyProfile = ({ user }) => {
+  console.log("🚀 ~ file: MyProfile.js ~ line 7 ~ MyProfile ~ user", user);
   const [pw, setPW] = useState("");
   const [over, setOver] = useState(false);
   const [text, setText] = useState("잘못된 비밀번호입니다");
   const [over2, setOver2] = useState(false);
   const [address, setAddress] = useState([]);
+  const [phone, setPhone] = useState("");
+  const [newNick, setNewNick] = useState("");
 
   const pwCheck = () => {
     if (pw === "12345678") {
@@ -25,6 +28,7 @@ const MyProfile = () => {
   };
 
   const profileChange = () => {
+    // inputs에 있는 값들 얻어올 수 있게끔
     setOver2(true);
   };
 
@@ -78,6 +82,38 @@ const MyProfile = () => {
     console.log(address);
   }, [address]);
 
+  const initPhone = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    return fetch(
+      "/uniearth/users/uniearth_user_id/" + user?.useremail,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => JSON.parse(result))
+      .catch((error) => console.log("error", error));
+  };
+
+  useEffect(() => {
+    const init = async () => {
+      let res = await initPhone();
+      let phone = res.users[0].uniearth_user_phone;
+      setPhone(phone);
+    };
+    init();
+  }, []);
+
   return (
     <div className="profile">
       <div className="profile_check" style={over ? { display: "none" } : {}}>
@@ -97,14 +133,17 @@ const MyProfile = () => {
       <div className="profile_left" style={over ? { display: "flex" } : {}}>
         <div className="profile_sum">
           <div className="profile_img">
-            
-            {<img src={process.env.PUBLIC_URL + "/images/profileImgFull.png"}
-                  alt="scope"/> }
+            {
+              <img
+                src={process.env.PUBLIC_URL + "/images/profileImgFull.png"}
+                alt="scope"
+              />
+            }
           </div>
           <div className="profile_sum_info">
             <div className="profile_sum_info_top">
-              <div className="profile_sum_nickname">닉네임</div>
-              <div className="profile_sum_email">12345@konkuk.ac.kr</div>
+              <div className="profile_sum_nickname">{user?.usernickname}</div>
+              <div className="profile_sum_email">{user?.useremail}</div>
             </div>
 
             <div className="profile_sum_change">프로필 사진 변경</div>
@@ -113,7 +152,12 @@ const MyProfile = () => {
         <div className="profile_setting">
           <div className="profile_nickname">
             <div className="profile_title">닉네임</div>
-            <input type="text" className="profile_set" defaultValue="닉네임" />
+            <input
+              type="text"
+              className="profile_set"
+              onChange={setNewNick}
+              defaultValue={user?.usernickname}
+            />
             <div className="profile_exp">
               <p>서비스에서 사용하는 닉네임입니다.</p>
               <p>
@@ -153,15 +197,12 @@ const MyProfile = () => {
           </div>
           <div className="profile_phone">
             <div className="profile_title">연락처</div>
-            <input
-              type="text"
-              className="profile_set"
-              defaultValue="010-1234-5678"
-            />
+            <input type="text" className="profile_set" defaultValue={phone} />
           </div>
           <div className="profile_sex">
             <div className="profile_title">성별</div>
             <form className="profile_set_chk">
+              {/* {user.sex === 1 ? "여자" : "남자"} */}
               <input
                 type="radio"
                 name="chk_info"

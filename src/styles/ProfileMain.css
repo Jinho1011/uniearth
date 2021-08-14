@@ -1,6 +1,7 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 
 .main {
+    padding-top: 60px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -8,13 +9,10 @@
 
 .probar {
     font-family: 'NanumSquare', sans-serif;
-    margin-top: 20px;
     width: 1280px;
     border-radius: 20px;
     display: flex;
     flex-direction: row;
-    padding-top: 50px;
-    margin-bottom: 102px;
 }
 
 button {
