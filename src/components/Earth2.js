@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Globe from "react-globe.gl";
 
-import "../styles/Earth.css";
-
 const Earth = () => {
   const globeEl = useRef();
   let earth = null;
@@ -10,31 +8,34 @@ const Earth = () => {
   let scene = null;
   let canvas = null;
   let controls = null;
-
-  const initEarth = () => {
+  useEffect(() => {
     canvas = globeEl.current;
     scene = canvas.scene();
     camera = canvas.camera();
     earth = scene.children[3];
     controls = canvas.controls();
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = -2;
-    // console.log(camera.position);
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    camera.position.set(2.14313, 2.14313, 240);
+  }, []);
 
-    camera.position.set(2.14313, 2.14313, 236);
+  const initEarth = () => {};
+
+  const clickEvent = (lat, lng) => {
+    console.log(lat, lng);
   };
-
-  useEffect(() => {}, []);
 
   return (
     <Globe
       ref={globeEl}
-      width={480}
-      height={480}
+      width={360}
+      height={360}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
-      backgroundImageUrl={process.env.PUBLIC_URL + "/images/transparent.png"}
+      pointAltitude="size"
+      pointColor="color"
+      animateIn={false}
+      onGlobeClick={clickEvent} //(lat, lng) => console.log(lat, lng)}
       onGlobeReady={initEarth}
-      animateIn={true}
     />
   );
 };

@@ -12,22 +12,26 @@ const Header = () => {
       <div className="header-logo">
         <img src={process.env.PUBLIC_URL + "/images/logo.png"}></img>
       </div>
-      {isLogin ? (
+      {isLogin() ? (
+        <div className="navs">
+          <div className="nav">
+            <Link to="/feed" className="nav-link">
+              피드
+            </Link>
+          </div>
+          <div className="nav">
+            <Link to="/profile" className="nav-link">
+              마이페이지
+            </Link>
+          </div>
+        </div>
+      ) : (
         <div className="navs">
           <div className="nav">
             <Link to="/login" className="nav-link">
               로그인
             </Link>
           </div>
-        </div>
-      ) : (
-        <div className="navs">
-          <Link to="/feed" className="nav-link">
-            피드
-          </Link>
-          <Link to="/profile" className="nav-link">
-            마이페이지
-          </Link>
         </div>
       )}
     </div>
