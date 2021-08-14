@@ -90,7 +90,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
               <input type="checkbox" id="checkbox" name="topic" value="false" onChange={onChangeTopic} />
               <label for="checkbox"></label>
             </div>
-            <p id="">오늘 먹은(먹을) 점심은?</p>
+            <p >오늘 먹은(먹을) 점심은?</p>
           </div>
 
           <p id="attachmentsHeader">첨부항목</p>
