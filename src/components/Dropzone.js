@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDropzone } from "react-dropzone";
+import VideoThumbnail from 'react-video-thumbnail';
 
 const thumbsContainer = {
   display: "flex",
@@ -39,10 +40,17 @@ function Dropzone({ files, setFiles }) {
   //const [files, setFiles] = useState([]);
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
+    accept: "image/*", 
+    accept: "video/*",
     onDrop: (acceptedFiles) => {
       if (fileCount >= 6) {
         removeDropzone();
+      }
+      let fileName=acceptedFiles[0].name.split('.');
+      // console.log(fileName);
+      let fileExtension=fileName[fileName.length-1];
+      // console.log(fileExtension);
+      if(fileExtension === "mp4" || fileExtension === "avi"){
       }
       setFiles([
         ...files,
@@ -59,7 +67,7 @@ function Dropzone({ files, setFiles }) {
 
   const thumbs = files.map((file) => {
     return (
-      <div className="thumb" key={file.name}>
+      <div className="thumb" key={file[0].name}>
         <div style={thumbInner}>
           <img src={file[0].preview} style={img} onMouseOver={onHoverThumb} />
         </div>
