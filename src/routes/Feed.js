@@ -11,7 +11,10 @@ import { EqualStencilFunc } from "three";
 
 const Feed = () => {
   const [token, setToken] = useState({});
-  const [coord, setCoord] = useState({});
+  const [coord, setCoord] = useState({
+    lat: 37,
+    lng: 127,
+  });
   const [showModal, setShowModal] = useState(false);
   const [time, setTime] = useState({});
   const [selected, setSelected] = useState({});
@@ -51,10 +54,14 @@ const Feed = () => {
       <Header></Header>
       <div className="container is-max-desktop earth-container">
         <div className="info-container">
-          <div className="time-info">
-            {time.hours}:{time.minutes}
-          </div>
-          <div className="lng-info">{coord.lng}</div>
+          {coord ? (
+            <>
+              <div className="time-info">
+                {time.hours}:{time.minutes}
+              </div>
+              <div className="lng-info">{coord.lng}°</div>
+            </>
+          ) : null}
         </div>
         <Earth setCoord={setCoord} setTime={setTime}></Earth>
       </div>

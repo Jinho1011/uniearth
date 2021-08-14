@@ -18,6 +18,10 @@ const Earth = ({ setCoord, setTime }) => {
     controls.enableZoom = false;
     controls.enablePan = false;
     camera.position.set(2.14313, 2.14313, 240);
+    setTime({
+      hours: today.getHours(),
+      minutes: today.getMinutes(),
+    });
   }, []);
 
   var today = new Date();

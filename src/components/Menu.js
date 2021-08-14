@@ -12,11 +12,11 @@ const Menu = ({ setShowModal, continents }) => {
     <div className="container is-max-desktop menu">
       <div className="menu-left">
         <button className="menu-button">현재 위치를 경도로 설정</button>
-        {/* {continents.length ? (
+        {continents.length ? (
           <button className="menu-button">
             {continents.map((c) => c + "  ")}
           </button>
-        ) : null} */}
+        ) : null}
       </div>
       <div className="menu-right">
         <button className="menu-button" onClick={() => setShowModal(true)}>
