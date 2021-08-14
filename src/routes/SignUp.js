@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { sha256 } from "js-sha256";
+
+import key from "../key";
 
 const SignUp = () => {
   const [isDone, setDone] = useState(false);
@@ -17,8 +20,39 @@ const SignUp = () => {
     });
   };
 
+  const signup = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${key}`);
+
+    var raw = JSON.stringify({
+      uniearth_user_id: inputs.id,
+      uniearth_user_pw: sha256(inputs.pwd),
+      uniearth_user_nickname: inputs.nick,
+      uniearth_user_sex: 1,
+      uniearth_user_address: "주소",
+      uniearth_user_phone: "010-1234-5678",
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    return fetch("/users", requestOptions)
+      .then((response) => response.text())
+      .then((result) => result)
+      .catch((error) => error);
+  };
+
+  const initLocation = () => {};
+
   const submit = async () => {
-    console.log(inputs);
+    let res = await signup();
+    res = JSON.parse(res);
+    console.log(res);
   };
 
   return (
@@ -36,6 +70,11 @@ const SignUp = () => {
         닉네임
         <input name="nick" onChange={onChange} value={inputs.nick}></input>
       </div>
+      <div>
+        주소
+        <button onClick={initLocation}>현재 위치로</button>
+      </div>
+      <div></div>
 
       {isDone ? <Redirect to="/login" /> : null}
 
