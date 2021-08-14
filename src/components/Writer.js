@@ -200,7 +200,7 @@ const Writer = ({ showModal, setShowModal, token }) => {
             </div>
             <p>오늘 먹은(먹을) 점심은?</p>
           </div>
-
+          
           <p id="attachmentsHeader">첨부항목</p>
           <Dropzone files={files} setFiles={setFiles} fileCount={fileCount} setFileCount={setFileCount}/>
           <p id="fillout_header">작성란</p>

@@ -72,15 +72,15 @@
     color: #333333;
     font-weight: normal;
 }
-.writerModal section main #attachments{
+/* .writerModal section main #attachments{
     display: flex;
-}
+} */
 .writerModal section main #attachmentsHeader {
     display: block;
     color: #B6B6B6;
     font-weight: bold;
 }
-.writerModal section main #attachments div {
+/* .writerModal section main #attachments div {
     width: 144px;
     height: 144px;
     border: 1px solid #B6B6B6;
@@ -98,7 +98,7 @@
 .writerModal section main #attachments div p {
     margin: 0;
     display: flex;
-}
+} */
 
 .writerModal section main .container {
     margin: 0;
