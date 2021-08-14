@@ -132,13 +132,13 @@ const MyProfile = () => {
           <div className="profile_loca">
             <div className="profile_title">위치</div>
             <div className="profile_set" id="profile_set">
-              
+              <div>
                 {address.length ? (
                   <div>
                     {address[1]}, {address[0]}
                   </div>
                 ) : null}
-              
+              </div>
               <a onClick={setLocation}>
                 <img
                   src={process.env.PUBLIC_URL + "/images/scope_logo.png"}
