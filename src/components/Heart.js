@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import '../css/Heart.css';
+import '../styles/Heart.css';
 
 class Heart extends Component {
     render(){
