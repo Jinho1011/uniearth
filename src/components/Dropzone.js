@@ -18,43 +18,39 @@ const img = {
   display: "block",
   width: "auto",
   height: "144px",
-  width: "144px"
+  width: "144px",
 };
 
 const onHoverThumb = (e) => {
-  //console.log(e.target);
+  // console.log(e.target);
 };
-
-
-
-
 
 let fileCount = Number(0);
 
-function Dropzone({files, setFiles}) {
+function Dropzone({ files, setFiles }) {
   const zoneRef = useRef(null);
 
-  const removeDropzone = () =>{
+  const removeDropzone = () => {
     zoneRef.current.style.display = "none";
     console.log(zoneRef.current);
-    
-  }
+  };
   //const [images, setImages] = useState([]);
   //const [fileCount, setFileCount] = useState(Number('0'));
   //const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      if(fileCount >= 6){
+      if (fileCount >= 6) {
         removeDropzone();
       }
       setFiles([
         ...files,
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          }),
-          fileCount = fileCount + 1,
+        acceptedFiles.map(
+          (file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            }),
+          (fileCount = fileCount + 1)
           //console.log(fileCount)
         ),
       ]);
@@ -62,19 +58,18 @@ function Dropzone({files, setFiles}) {
   });
 
   const thumbs = files.map((file) => {
-    
-    return(
-      <div className="thumb" key={file.name} >
+    return (
+      <div className="thumb" key={file.name}>
         <div style={thumbInner}>
-          <img src={file[0].preview} style={img}  onMouseOver={onHoverThumb}/>
+          <img src={file[0].preview} style={img} onMouseOver={onHoverThumb} />
         </div>
       </div>
-    )
+    );
   });
 
   useEffect(() => {
     files.forEach((file) => URL.revokeObjectURL(file.preview));
-  },[files]);
+  }, [files]);
 
   return (
     <section className="container">
