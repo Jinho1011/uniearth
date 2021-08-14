@@ -4,6 +4,9 @@ import "../styles/Posts.css";
 
 const Post = ({ post }) => {
   const [files, setFiles] = useState([]);
+  const [comment, setComment] = useState("");
+
+  const leaveComment = () => {};
 
   return (
     <div className="post-container">
@@ -40,8 +43,10 @@ const Post = ({ post }) => {
           <div className="comments"></div>
         </div>
         <div className="input-container">
+          <a onClick={leaveComment}>올리기</a>
           <input
             className="comment-input"
+            onChange={setComment}
             placeholder="댓글을 적어보세요"
           ></input>
         </div>
