@@ -23,28 +23,28 @@ const Writer = ({ showModal, setShowModal, token }) => {
   };
 
   const submit = () => {
-    // console.log({topic});
-    // console.log({files});
-    // console.log({fillout});
+    console.log({topic});
+    console.log({files});
+    console.log({fillout});
 
-    Axios.post(
-      "/uniearth/topics",
-      {
-        topic,
-      },
-      {
-        "content-type": "application/json;charset=utf-8;",
-      }
-    ).then((res) => {
-      console.log(res);
-    });
+    // Axios.post(
+    //   "/uniearth/topics",
+    //   {
+    //     topic,
+    //   },
+    //   {
+    //     "content-type": "application/json;charset=utf-8;",
+    //   }
+    // ).then((res) => {
+    //   console.log(res);
+    // });
 
     closeModal();
   };
 
   const onChangeTopic = (e) => {
     if (e.target.checked) {
-      setTopic(e.target.value);
+      setTopic("true");
     } else {
       setTopic("false");
     }
@@ -74,20 +74,26 @@ const Writer = ({ showModal, setShowModal, token }) => {
           </div>
         </header>
         <main>
-          <p id="topic_header">주제선택</p>
+          <p id="topicHeader">주제선택</p>
           <div id="topic">
-            <div className="topic_category">
+            {/* <div className="topicCategory">
               <input
                 type="checkbox"
                 id="topic"
                 name="topic"
-                value="true"
+                value="false"
                 onChange={onChangeTopic}
               />
               <label for="topic">오늘 먹은(먹을) 점심은?</label>
+            </div> */}
+            <div className="round">
+              <input type="checkbox" id="checkbox" name="topic" value="false" onChange={onChangeTopic} />
+              <label for="checkbox"></label>
             </div>
+            <p id="">오늘 먹은(먹을) 점심은?</p>
           </div>
-          <p id="attachments_header">첨부항목</p>
+
+          <p id="attachmentsHeader">첨부항목</p>
           <Dropzone files={files} setFiles={setFiles} />
           <p id="fillout_header">작성란</p>
           <div id="fillout">
