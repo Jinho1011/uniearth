@@ -70,6 +70,18 @@ const Post = ({ user, post, refresh, setRefresh }) => {
     init();
   }, []);
 
+  useEffect(() => {
+    const init = async () => {
+      let { res, data } = await getComments();
+      if (res.status === 200) {
+        data = await data;
+        data = JSON.parse(data);
+        setComments(data.comments);
+      }
+    };
+    init();
+  }, [refresh]);
+
   return (
     <div className="post-container">
       <div className="content-container">
@@ -119,6 +131,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
             className="comment-input"
             onChange={(e) => setComment(e.target.value)}
             placeholder="댓글을 적어보세요"
+            value={comment}
           ></input>
         </div>
       </div>

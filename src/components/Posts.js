@@ -54,8 +54,10 @@ const Posts = ({ token, coord, refresh, setRefresh }) => {
 
   useEffect(() => {
     const init = async () => {
+      console.log("refresh");
       let res = await getPosts();
       res = JSON.parse(res);
+      console.log("🚀 ~ file: Posts.js ~ line 60 ~ init ~ res", res);
       setPosts(res.posts);
     };
     init();

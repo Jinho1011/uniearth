@@ -1,5 +1,6 @@
 import { add } from "lodash";
 import React, { useState, useEffect } from "react";
+import { sha256 } from "js-sha256";
 
 import "../styles/MyProfile.css";
 
@@ -87,7 +88,34 @@ const MyProfile = ({ user }) => {
   const profileChange = () => {
     // inputs에 있는 값들 얻어올 수 있게끔
     setOver2(true);
-    console.log(newNick + " + " + newPw + " + " + phone + " + " + newSex);
+    console.log(newNick, newPw, phone, newSex);
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
+
+    var raw = JSON.stringify({
+      uniearth_user_id: user?.useremail,
+      uniearth_user_pw: newPw,
+      uniearth_user_phone: phone != "" ? phone : user.uniearth_user_phone,
+      uniearth_user_sex: newSex,
+      uniearth_user_address: address[1] + ", " + address[0],
+    });
+
+    var requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("/uniearth/users/uniearth_user_id/" + user?.useremail, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   };
 
   const setLocation = () => {
