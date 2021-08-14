@@ -102,3 +102,10 @@
 .comment-input::placeholder {
   color: #333333;
 }
+
+.input-container a {
+  font-size: 0.8rem;
+  position: absolute;
+  padding-top: 12px;
+  padding-left: 200px;
+}
