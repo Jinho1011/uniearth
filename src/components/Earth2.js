@@ -29,17 +29,11 @@ const Earth = ({ setCoord, setTime }) => {
       lat: Math.round(e.lat),
       lng: Math.round(e.lng),
     });
-    let month = today.getMonth();
-    let hours = today.getHours() - Math.ceil(e.lng / 15) + 9;
-    let date = today.getDate();
-    let minutes = today.getMinutes();
-    // ,date,hours,minutes;
-    // (today.getHours() - Math.ceil(e.lng / 15) + 9)>=0?:
+    let temp = today.getHours() + Math.ceil(e.lng / 15) - 9;
+    let hours = temp >= 0 ? (temp >= 24 ? temp - 24 : temp) : 24 + temp;
     setTime({
-      month: month + 1,
-      date: date,
       hours: hours,
-      minutes: minutes,
+      minutes: today.getMinutes(),
     });
   };
 

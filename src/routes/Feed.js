@@ -29,7 +29,9 @@ const Feed = () => {
       <Header></Header>
       <div className="container is-max-desktop earth-container">
         <div className="info-container">
-          <div className="time-info"></div>
+          <div className="time-info">
+            {time.hours}:{time.minutes}
+          </div>
           <div className="lng-info">{coord.lng}</div>
         </div>
         <Earth setCoord={setCoord} setTime={setTime}></Earth>
