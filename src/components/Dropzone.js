@@ -22,9 +22,11 @@ const img = {
   width: "144px",
 };
 
-const onClickThumb = (e) => {
-  console.log(e.target);
-};
+// const onClickThumb = (e) => {
+//   //console.log(e.target);
+//   //e.target.style.display="none";
+
+// };
 
 function Dropzone({ files, setFiles, fileCount, setFileCount }) {
   const zoneRef = useRef(null);
@@ -66,7 +68,7 @@ function Dropzone({ files, setFiles, fileCount, setFileCount }) {
     return (
       <div className="thumb" key={file[0].name}>
         <div style={thumbInner}>
-          <img src={file[0].preview} style={img} onClick={onClickThumb} />
+          <img src={file[0].preview} style={img} />
         </div>
       </div>
     );
