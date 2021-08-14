@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { sha256 } from "js-sha256";
-import jwt_decode from "jwt-decode";
 
 import { Background } from "../components/Background";
 import Header from "../components/Header";
@@ -55,8 +54,7 @@ const Login = () => {
     let { code, data } = await login();
     if (code === 200) {
       data = JSON.parse(await data);
-      let decoded = jwt_decode(data.token);
-      window.sessionStorage.setItem("JWT", decoded);
+      window.sessionStorage.setItem("JWT", data.token);
       setDone(true);
     } else {
       alert("login failed");
@@ -83,7 +81,7 @@ const Login = () => {
               className="form-input"
               placeholder="비밀번호를 입력해주세요"
               onChange={onChange}
-              value={inputs.pwd}
+              // value={inputs.pwd}
             ></input>
           </div>
           <div className="form-etc">

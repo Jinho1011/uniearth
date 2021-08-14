@@ -25,7 +25,7 @@
   background-color: rgba(0, 0, 0, 0);
   border: none;
   border-bottom: 2px solid rgb(192, 192, 192);
-  font-family: NanumSquare;
+  /* font-family: NanumSquare; */
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -141,8 +141,4 @@
 
 .form-etc > a:hover {
   color: #ccc;
-}
-
-input.password {
-  color: #fff;
 }
