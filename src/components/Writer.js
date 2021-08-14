@@ -54,8 +54,6 @@ const Writer = ({ showModal, setShowModal }) => {
           <p id="topic_header">주제선택</p>
           <div id="topic">
             <div className="topic_category">
-              <p>오늘의 주제</p>
-
               <input
                 type="checkbox"
                 id="topic"
@@ -72,12 +70,7 @@ const Writer = ({ showModal, setShowModal }) => {
           <div id="fillout">
             <form>
               <p>
-                <textarea
-                  cols="100"
-                  rows="4"
-                  onChange={onChangeFillout}
-                  maxLength="100"
-                ></textarea>
+                <textarea cols="100" rows="4" onChange={onChangeFillout} maxLength="200"></textarea>
               </p>
             </form>
           </div>
