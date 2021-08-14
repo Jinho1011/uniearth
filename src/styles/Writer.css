@@ -100,17 +100,14 @@
     display: flex;
 } */
 
-.writerModal section main .container {
+.writerModal section main .dropzoneContainer {
     margin: 0;
     height: 180px;
     width: 1128px;
-}
-
-.writerModal section main .container{
     display: flex;
 }
 
-.writerModal section main .container .thumb {
+.writerModal section main .dropzoneContainer .thumb {
     display: flex;
     width: 144px;
     height: 144px;
@@ -120,7 +117,7 @@
     border-radius: 15px;
 }
 
-.writerModal section main .container .dropzone{
+.writerModal section main .dropzoneContainer .dropzone{
     display: flex;
     width: 144px;
     height: 144px;
@@ -130,13 +127,13 @@
     
 }
 
-.writerModal section main .container .dropzone img{
+.writerModal section main .dropzoneContainer .dropzone img{
     width: 40px;
     height: 40px;
     margin: 32px 52px 20px 52px;
 }
 
-.writerModal section main .container .dropzone p{
+.writerModal section main .dropzoneContainer .dropzone p{
     margin:0 auto 32px auto;
 }
 

@@ -77,7 +77,7 @@ function Dropzone({ files, setFiles, fileCount, setFileCount }) {
   }, [files]);
 
   return (
-    <section className="container">
+    <section className="dropzoneContainer">
       {/* <Thumbs style={thumbsContainer}></Thumbs> */}
       {thumbs}
       <div {...getRootProps({ className: "dropzone" })} ref={zoneRef}>
