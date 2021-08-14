@@ -11,11 +11,71 @@ const MyProfile = ({ user }) => {
   const [over2, setOver2] = useState(false);
   const [address, setAddress] = useState([]);
   const [phone, setPhone] = useState("");
-  const [newNick, setNewNick] = useState("");
+
+  const [newNick, setNick] = useState("");
+  const [newPw, setNewPw] = useState("");
+  const [newSex, setNewSex] = useState();
+
+  const onNickChange = (e) => {
+    setNick(e.target.value);
+  }
+
+  const onPwChange = (e) => {
+    setNewPw(e.target.value);
+  }
+
+  const onPhoneChange = (e) => {
+    setPhone(e.target.value);
+  }
+
 
   const pwCheck = () => {
     if (pw === "12345678") {
       setOver(true);
+
+      function startUser() {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append(
+        "Authorization",
+        "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    return fetch(
+      "/uniearth/users/uniearth_user_id/" + user?.useremail,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+
+        //let res = await initPhone();
+        let res = JSON.parse(result);
+        let phones = res?.users[0].uniearth_user_phone;
+        console.log(res?.users[0].uniearth_user_address);
+
+      let addressSet = res?.users[0].uniearth_user_address;
+      console.log(addressSet);
+      var splits = addressSet.split(', ');
+      console.log(splits.length);
+      var city = splits[1];
+      var country = splits[0];
+      
+      setAddress([city, country]);
+      setPhone(phones);
+      setNick(user?.usernickname);
+      setNewSex(user?.sex);
+      })
+      .catch((error) => console.log("error", error));
+      }
+
+      startUser();
+
       setText("변경되었습니다");
       setOver2(false);
     } else {
@@ -30,6 +90,8 @@ const MyProfile = ({ user }) => {
   const profileChange = () => {
     // inputs에 있는 값들 얻어올 수 있게끔
     setOver2(true);
+    console.log(newNick + " + " + newPw + " + " + phone + " + " + newSex);
+
   };
 
   const setLocation = () => {
@@ -53,6 +115,7 @@ const MyProfile = ({ user }) => {
       )
         .then((response) => response.text())
         .then((result) => {
+          setAddress([]);
           let res = JSON.parse(result).results[0];
           let address_comps = res.address_components;
           console.log(
@@ -60,6 +123,7 @@ const MyProfile = ({ user }) => {
             address_comps
           );
           address_comps.map((comp) => {
+            
             if (comp.types.includes("country")) {
               setAddress((oldArray) => [...oldArray, comp.long_name]);
             } else if (comp.types.includes("administrative_area_level_1")) {
@@ -82,37 +146,7 @@ const MyProfile = ({ user }) => {
     console.log(address);
   }, [address]);
 
-  const initPhone = () => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Authorization",
-      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
-    );
-
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    return fetch(
-      "/uniearth/users/uniearth_user_id/" + user?.useremail,
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => JSON.parse(result))
-      .catch((error) => console.log("error", error));
-  };
-
-  useEffect(() => {
-    const init = async () => {
-      let res = await initPhone();
-      let phone = res.users[0].uniearth_user_phone;
-      setPhone(phone);
-    };
-    init();
-  }, []);
+  
 
   return (
     <div className="profile">
@@ -155,7 +189,7 @@ const MyProfile = ({ user }) => {
             <input
               type="text"
               className="profile_set"
-              onChange={setNewNick}
+              onChange={onNickChange}
               defaultValue={user?.usernickname}
             />
             <div className="profile_exp">
@@ -171,6 +205,7 @@ const MyProfile = ({ user }) => {
             <input
               type="password"
               className="profile_set"
+              onChange={onPwChange}
               defaultValue="12345678"
               maxLength="15"
             />
@@ -197,21 +232,20 @@ const MyProfile = ({ user }) => {
           </div>
           <div className="profile_phone">
             <div className="profile_title">연락처</div>
-            <input type="text" className="profile_set" defaultValue={phone} />
+            <input type="text" className="profile_set" onChange={onPhoneChange} defaultValue={phone} />
           </div>
           <div className="profile_sex">
             <div className="profile_title">성별</div>
             <form className="profile_set_chk">
-              {/* {user.sex === 1 ? "여자" : "남자"} */}
               <input
                 type="radio"
                 name="chk_info"
                 id="hello1"
                 value="남성"
-                defaultChecked="checked"
+                defaultChecked= {user?.sex === "0" ? "checked" : null }
               />
               <label htmlFor="hello1">남성</label>
-              <input type="radio" name="chk_info" id="hello2" value="여성" />
+              <input type="radio" name="chk_info" id="hello2" value="여성" defaultChecked= {user?.sex === "0" ? null : "checked" }/>
               <label htmlFor="hello2">여성</label>
             </form>
           </div>
