@@ -6,7 +6,7 @@ Modal.setAppElement(document.getElementById("root"));
 const Writer = ({ showModal, setShowModal }) => {
   return (
     <Modal isOpen={showModal} contentLabel="Example Modal">
-      HI
+      HIdd
     </Modal>
   );
 };
