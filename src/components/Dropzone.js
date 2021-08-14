@@ -41,15 +41,13 @@ function Dropzone(props) {
     },
   });
 
-  const images=[];
-
-  const thumbs = files.map((file) => {
+  const thumbs = files.map((file) => (
     <div className="thumb" key={file.name} onMouseOver={onHoverThumb}>
       <div style={thumbInner}>
         <img src={file.preview} style={img} />
       </div>
     </div>
-  });
+  ));
 
   useEffect(
     () => () => {
