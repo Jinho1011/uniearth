@@ -5,23 +5,29 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import PublicRoute from "./components/PublicRoute";
+import PrivateRoute from "./components/PrivateRoute";
+
 import Feed from "./routes/Feed";
 import Profile from "./routes/Profile";
-import Login from "./routes/Login";
 import SignUp from "./routes/SignUp";
+import Login from "./routes/Login";
+import Main from "./routes/Main";
 
 function App() {
-  let isAuthorized = sessionStorage.getItem("JWT");
-
   return (
     <Router>
-      {!isAuthorized ? <Redirect to="/login" /> : <Redirect to="/" />}
-
       <Switch>
-        <Route path="/" exact component={Feed}></Route>
-        <Route path="/login" exact component={Login}></Route>
-        <Route path="/signup" exact component={SignUp}></Route>
-        <Route path="/user/:id" exact component={Profile}></Route>
+        <PublicRoute restricted={true} component={Main} path="/" exact />
+        <PublicRoute
+          restricted={true}
+          component={SignUp}
+          path="/register"
+          exact
+        />
+        <PublicRoute restricted={true} component={Login} path="/login" exact />
+        <PrivateRoute component={Feed} path="/feed" exact />
+        <PrivateRoute component={Profile} path="/user/:id" exact />
       </Switch>
     </Router>
   );
