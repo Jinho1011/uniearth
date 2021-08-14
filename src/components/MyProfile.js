@@ -97,7 +97,9 @@ const MyProfile = () => {
       <div className="profile_left" style={over ? { display: "flex" } : {}}>
         <div className="profile_sum">
           <div className="profile_img">
-            {/* <img src={profileImg} alt="img" /> */}
+            
+            {<img src={process.env.PUBLIC_URL + "/images/profileImgFull.png"}
+                  alt="scope"/> }
           </div>
           <div className="profile_sum_info">
             <div className="profile_sum_info_top">
