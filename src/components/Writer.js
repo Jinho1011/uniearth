@@ -5,11 +5,7 @@ Modal.setAppElement(document.getElementById("root"));
 
 const Writer = ({ showModal, setShowModal }) => {
   return (
-    <Modal
-      isOpen={showModal}
-      onRequestClose={closeModal}
-      contentLabel="Example Modal"
-    >
+    <Modal isOpen={showModal} contentLabel="Example Modal">
       HI
     </Modal>
   );
