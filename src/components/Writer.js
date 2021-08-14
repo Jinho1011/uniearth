@@ -76,7 +76,7 @@ const Writer = ({ showModal, setShowModal }) => {
                   cols="100"
                   rows="4"
                   onChange={onChangeFillout}
-                  maxLength="200"
+                  maxLength="100"
                 ></textarea>
               </p>
             </form>

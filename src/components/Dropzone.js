@@ -5,19 +5,7 @@ const thumbsContainer = {
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
-  marginTop: 16,
-};
-
-const thumb = {
-  display: "inline-flex",
-  borderRadius: 2,
-  border: "1px solid #eaeaea",
-  marginBottom: 8,
-  marginRight: 8,
-  width: 100,
-  height: 100,
-  padding: 4,
-  boxSizing: "border-box",
+  // marginTop: 16,
 };
 
 const thumbInner = {
@@ -29,7 +17,13 @@ const thumbInner = {
 const img = {
   display: "block",
   width: "auto",
-  height: "100%",
+  height: "144px",
+  width: "144px",
+  margin: "4px"
+};
+
+const onHoverThumb = (e) => {
+  console.log(e);
 };
 
 function Dropzone(props) {
@@ -47,13 +41,15 @@ function Dropzone(props) {
     },
   });
 
-  const thumbs = files.map((file) => (
-    <div style={thumb} key={file.name}>
+  const images=[];
+
+  const thumbs = files.map((file) => {
+    <div className="thumb" key={file.name} onMouseOver={onHoverThumb}>
       <div style={thumbInner}>
         <img src={file.preview} style={img} />
       </div>
     </div>
-  ));
+  });
 
   useEffect(
     () => () => {
