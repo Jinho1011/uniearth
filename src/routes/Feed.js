@@ -34,7 +34,10 @@ const Feed = () => {
       </div>
       <Menu setShowModal={setShowModal}></Menu>
       <Writer showModal={showModal} setShowModal={setShowModal} token={token} />
-      <Posts token={token} coord={coord}></Posts>
+
+      <div className="container is-max-desktop ">
+        <Posts token={token} coord={coord}></Posts>
+      </div>
     </Background>
   );
 };

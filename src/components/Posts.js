@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import "bulma/css/bulma.min.css";
 
+import "../styles/Posts.css";
 import Post from "./Post";
 
 const Posts = ({ token, coord }) => {
@@ -52,7 +53,7 @@ const Posts = ({ token, coord }) => {
   }, []);
 
   return (
-    <div>
+    <div className="posts-container">
       {posts
         .slice(0)
         .reverse()
