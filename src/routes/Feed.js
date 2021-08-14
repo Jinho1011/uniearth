@@ -14,7 +14,7 @@ const Feed = () => {
   const [coord, setCoord] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [time, setTime] = useState({});
-  // const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState({});
   const [continents, setContinents] = useState([]);
   const c = [
     { name: "아시아", range: [24, 127] },
@@ -29,20 +29,23 @@ const Feed = () => {
     let JWT = window.sessionStorage.getItem("JWT");
     setToken(JWT);
   }, []);
+
   useEffect(() => {
-    setContinents([]);
+    let temp = [];
+
     c.map((a) => {
-      // console.log(a.range[0]);
       if (a.range[0] <= coord.lng && coord.lng <= a.range[1]) {
-        setContinents([...continents, a.name]);
+        temp.push(a.name);
       }
     });
-    console.log(continents);
-    console.log(coord);
+
+    setContinents(temp);
   }, [coord]);
+
   useEffect(() => {
-    console.log(time);
+    // console.log(time);
   }, [time]);
+
   return (
     <Background>
       <Header></Header>
