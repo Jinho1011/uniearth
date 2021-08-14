@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "bulma/css/bulma.min.css";
+
+import { Background } from "../components/Background";
 import Header from "../components/Header";
 import ReactGlobe from "react-globe";
 import "../styles/Main.css";
-const Background = styled.div`
-  background: url(${process.env.PUBLIC_URL + "/images/background.png"});
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100vw;
-  height: 100vh;
-`;
 
 const Main = () => {
   const options = {
