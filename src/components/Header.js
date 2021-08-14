@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="header container">
+    <div className="header container is-max-desktop">
       <div className="header-logo">
         <img src={process.env.PUBLIC_URL + "/images/logo.png"}></img>
       </div>
