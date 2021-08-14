@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Globe from "react-globe.gl";
 
-const Earth = () => {
+const Earth = ({ setCoord }) => {
   const globeEl = useRef();
   let earth = null;
   let camera = null;
@@ -22,7 +22,10 @@ const Earth = () => {
   const initEarth = () => {};
 
   const clickEvent = (lat, lng) => {
-    console.log(lat, lng);
+    setCoord({
+      lat: lat,
+      lng: lng,
+    });
   };
 
   return (
