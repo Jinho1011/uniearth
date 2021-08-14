@@ -6,6 +6,7 @@
 
 .post-container {
   display: flex;
+  justify-content: space-between;
   background-color: #fafafa;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -39,5 +40,65 @@
 .user-name {
   font-weight: bold;
   font-size: 1rem;
+  color: #333333;
+}
+
+.content-body {
+  height: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-none {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topic {
+  font-size: 1rem;
+  color: #333333;
+}
+
+.content-text {
+  padding: 26px 50px;
+}
+
+.content-text p {
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 34%;
+  padding: 40px 36px 30px 36px;
+}
+
+.commnet-header {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333333;
+  padding-bottom: 30px;
+}
+
+.comments {
+  display: flex;
+  background-color: #333333;
+}
+
+.comment-input {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 14px 16px;
+  background: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.comment-input::placeholder {
   color: #333333;
 }

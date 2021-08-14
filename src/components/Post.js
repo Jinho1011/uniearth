@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import "../styles/Posts.css";
 
 const Post = ({ post }) => {
-  console.log("🚀 ~ file: Post.js ~ line 4 ~ Post ~ post", post);
+  const [files, setFiles] = useState([]);
+
   return (
     <div className="post-container">
       <div className="content-container">
@@ -20,9 +21,31 @@ const Post = ({ post }) => {
           </div>
           <div className="likes-container"></div>
         </div>
-        <div className="content-body"></div>
+        <div className="content-body">
+          {files.length ? (
+            <div></div>
+          ) : (
+            <div className="file-none">
+              <div className="topic">오늘 먹은(먹을) 점심은?</div>
+            </div>
+          )}
+        </div>
+        <div className="content-text">
+          <p>{post.post_info}</p>
+        </div>
       </div>
-      <div className="comment-container">asd</div>
+      <div className="comment-container">
+        <div>
+          <div className="commnet-header">댓글</div>
+          <div className="comments"></div>
+        </div>
+        <div className="input-container">
+          <input
+            className="comment-input"
+            placeholder="댓글을 적어보세요"
+          ></input>
+        </div>
+      </div>
     </div>
   );
 };
