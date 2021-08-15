@@ -53,6 +53,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
 
     return fetch("/uniearth/comments/cmt_post/" + post.SEQ, requestOptions)
       .then((response) => {
+        console.log("🚀 ~ file: Post.js ~ line 56 ~ .then ~ response", response)
         return { res: response, data: response.text() };
       })
       .catch((error) => console.log("error", error));
