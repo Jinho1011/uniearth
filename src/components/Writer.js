@@ -110,10 +110,10 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
     myHeaders.append("Content-Type", "application/json");
 
     //_update_seq을 리턴
-    console.log(postResult);
+    console.log(postResult.postResult._update_seq);
     console.log(file);
     var raw = JSON.stringify({  
-      file_post: postResult._updated_seq,
+      file_post: postResult.postResult._update_seq,
       file_owner: user.useremail,
       file_path: file,
       file_size: 1111
