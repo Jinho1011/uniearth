@@ -28,7 +28,17 @@ const MyProfile = ({ user }) => {
     setPhone(e.target.value);
   };
 
+  const onMaleChange = () => {
+    setNewSex("0");
+  };
+
+  const onFemaleChange = () => {
+    setNewSex("1");
+  };
+
   const pwCheck = () => {
+
+
     if (pw === "12345678") {
       setOver(true);
 
@@ -99,7 +109,7 @@ const MyProfile = ({ user }) => {
 
     var raw = JSON.stringify({
       uniearth_user_id: user?.useremail,
-      uniearth_user_pw: newPw,
+      uniearth_user_pw: sha256(newPw),
       uniearth_user_phone: phone != "" ? phone : user.uniearth_user_phone,
       uniearth_user_sex: newSex,
       uniearth_user_address: address[1] + ", " + address[0],
@@ -268,16 +278,11 @@ const MyProfile = ({ user }) => {
                 name="chk_info"
                 id="hello1"
                 value="남성"
-                defaultChecked={user?.sex === "0" ? "checked" : null}
+                onClick = {onMaleChange}
+                defaultChecked= {user?.sex === "0" ? "checked" : null }
               />
               <label htmlFor="hello1">남성</label>
-              <input
-                type="radio"
-                name="chk_info"
-                id="hello2"
-                value="여성"
-                defaultChecked={user?.sex === "0" ? null : "checked"}
-              />
+              <input type="radio" name="chk_info" id="hello2" value="여성" onClick={onFemaleChange} defaultChecked= {user?.sex === "0" ? null : "checked" }/>
               <label htmlFor="hello2">여성</label>
             </form>
           </div>
@@ -294,7 +299,7 @@ const MyProfile = ({ user }) => {
         <div className="profile_return_button">원래대로</div>
       </div>
       <div
-        className="profile_bottom"
+        className="profile_bottom container is-max-desktop"
         style={over2 ? { color: "white", backgroundColor: "#4E89FF" } : {}}
       >
         {text}

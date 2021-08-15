@@ -54,7 +54,7 @@ const Profile = () => {
   return (
     <Background>
       <Header></Header>
-      <div className="main">
+      <div className="main container is-max-desktop">
         <div className="probar">
           {content.map((section, index) => (
             <button onClick={() => contentChange(index)}>{section.tab}</button>
