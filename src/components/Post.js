@@ -139,7 +139,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   const Images = (files) => {
   console.log("🚀 ~ file: Post.js ~ line 140 ~ Images ~ files", files)
     files.map((file) => {
-      return <img src={file.file_path}></img>;
+      <img src={file.file_path}></img>;
     });
   };
 
