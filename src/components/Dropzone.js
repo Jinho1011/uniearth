@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDropzone } from "react-dropzone";
-import VideoThumbnail from 'react-video-thumbnail';
 
 const thumbsContainer = {
   display: "flex",
@@ -34,9 +33,6 @@ function Dropzone({ files, setFiles, fileCount, setFileCount }) {
     zoneRef.current.style.display = "none";
     console.log(zoneRef.current);
   };
-  //const [images, setImages] = useState([]);
-  //const [fileCount, setFileCount] = useState(Number('0'));
-  //const [files, setFiles] = useState([]);
 
   const waitFunction = (sec) => {
     return new Promise((resolve, reject) => {
@@ -65,13 +61,13 @@ function Dropzone({ files, setFiles, fileCount, setFileCount }) {
           canvas.width = video.videoWidth;
           canvas.height = video.videoHeight;
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-           ctx.canvas.toBlob(
-             blob => {
-               resolve(blob);
-             },
-             "image/jpeg",
-             1.0
-           );
+          ctx.canvas.toBlob(
+            blob => {
+              resolve(blob);
+            },
+            "image/jpeg",
+            1.0
+          );
         })
       })
     })
