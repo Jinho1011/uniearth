@@ -78,7 +78,8 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
     );
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
+    //_update_seq을 리턴
+    var raw = JSON.stringify({  
       post_title: "제목",
       post_info: fillout,
       post_topic: 1,
@@ -94,12 +95,27 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
       body: raw,
       redirect: "follow",
     };
-
     return fetch("/uniearth/posts", requestOptions)
       .then((response) => response.text())
       .then((result) => JSON.parse(result))
       .catch((error) => console.log("error", error));
   };
+
+  const createFile = (postResult, fileResult) => {
+    fileResult.then(res => {
+      let myHeaders = new Headers();
+      myHeaders.append(
+        "Authorization",
+        "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+      );
+      myHeaders.append("Content-Type", "application/json");
+      
+      let raw 
+    }).catch(err => {
+      alert('err');
+      alert(err);
+    })
+  }
 
   const uploadFile = (file) => {
     var myHeaders = new Headers();
@@ -119,18 +135,17 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
       redirect: "follow",
     };
 
-    fetch("/ftp/execute", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
+    return fetch("/ftp/execute", requestOptions)
+      .then((result) => result)
       .catch((error) => console.log("error", error));
 
-    fetch(
-      "https://uniearth.api.dev-whoan.xyz:58443/ftp/execute",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    // fetch(
+    //   "https://uniearth.api.dev-whoan.xyz:58443/ftp/execute",
+    //   requestOptions
+    // )
+    //   .then((response) => response.text())
+    //   .then((result) => console.log(result))
+    //   .catch((error) => console.log("error", error));
   };
 
   const submit = async () => {
@@ -140,7 +155,8 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
       // 파일이 있는 경우
       files.map((file) => {
         console.log(file);
-        uploadFile(file);
+        let fRes = uploadFile(file);
+        createFile(res, fRes);
       });
     }
     setRefresh(true);
