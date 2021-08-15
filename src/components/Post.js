@@ -136,12 +136,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
       .then((result) => JSON.parse(result))
       .catch((error) => console.log("error", error));
   */
-  const Images = (files) => {
-  console.log("🚀 ~ file: Post.js ~ line 140 ~ Images ~ files", files)
-    files.map((file) => {
-      <img src={file.file_path}></img>;
-    });
-  };
+
 
   return (
     <div className="post-container">
@@ -160,9 +155,9 @@ const Post = ({ user, post, refresh, setRefresh }) => {
           <div className="likes-container"></div>
         </div>
         <div className="content-body">
-          {files.length ? (
-            <Images files={files}></Images>
-          ) : (
+          {files.length ? {files.map(file => {
+            <img src={file.file_path}/></img>
+          })} : (
             <div className="file-none">
               <div className="topic">오늘 먹은(먹을) 점심은?</div>
             </div>
