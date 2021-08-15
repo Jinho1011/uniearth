@@ -10,3 +10,7 @@
 .logo {
   margin-bottom: 30px;
 }
+
+.picture-item img {
+  width: 60%;
+}

@@ -9,6 +9,19 @@
 
 .info-container {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   color: #fff;
+  padding-bottom: 2px;
+  border-bottom: 3px solid #ccc;
+  transition: 0.2s;
+}
+
+.info-container:hover {
+  border-bottom: 3px solid #fff;
+  cursor: pointer;
+}
+
+.info-container div {
+  font-size: 1.4rem;
+  font-weight: bold;
 }
