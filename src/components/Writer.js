@@ -126,7 +126,7 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
     );
 
     var formdata = new FormData();
-    formdata.append("post_files.upload", file);
+    formdata.append("post_file.upload", file);
 
     var requestOptions = {
       method: "POST",
