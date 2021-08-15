@@ -61,19 +61,22 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   const getFiles = () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
 
     var requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
     return fetch("/uniearth/files/file_post/" + post.SEQ, requestOptions)
-      .then(response => response.text())
-      .then(result => JSON.parse(result))
-      .catch(error => console.log('error', error));
-  }
+      .then((response) => response.text())
+      .then((result) => JSON.parse(result))
+      .catch((error) => console.log("error", error));
+  };
 
   useEffect(() => {
     const init = async () => {
@@ -85,13 +88,13 @@ const Post = ({ user, post, refresh, setRefresh }) => {
         data = JSON.parse(data);
         setComments(data.comments);
       }
-      
-      if(fileRes){
+
+      if (fileRes) {
         //fileRes.files[0]: {file_path: "[B@5a53782d", file_timestamp: "2021-08-15 20:12:48.0", file_owner: "dong", file_post: "64", SEQ: "5", …}
         //fileRes.files[1]: {file_path: "[B@5a53782d", file_timestamp: "2021-08-15 20:12:48.0", file_owner: "dong", file_post: "64", SEQ: "6", …}
-        setFiles(fileRes.files)
+        setFiles(fileRes.files);
       }
-      console.log("🚀 ~ file: Post.js ~ line 94 ~ init ~ res2", fileRes)
+      console.log("🚀 ~ file: Post.js ~ line 94 ~ init ~ res2", fileRes);
       // if(res2?.status === 200) {
       //   data2 = await data2;
       //   data2 = JSON.parse(data2);
@@ -115,16 +118,15 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   }, [refresh]);
 
   const Images = () => {
-    files.map(file => {
+    files.map((file) => {
       console.log(file.file_path);
-      let bufferBase64 = new Buffer( file.file_path, 'binary' ).toString('base64');
+      let bufferBase64 = new Buffer(file.file_path, "binary").toString(
+        "base64"
+      );
       console.log(bufferBase64);
       return null;
-      
-    })
-  }
-
- 
+    });
+  };
 
   //get /uniearth/files/file_post/게시글번호
   // --> 리턴: file_path 사용
@@ -148,7 +150,6 @@ const Post = ({ user, post, refresh, setRefresh }) => {
       .catch((error) => console.log("error", error));
   */
 
-
   return (
     <div className="post-container">
       <div className="content-container">
@@ -166,9 +167,16 @@ const Post = ({ user, post, refresh, setRefresh }) => {
           <div className="likes-container"></div>
         </div>
         <div className="content-body">
-          {files.length ? (files.map(file=> 
-            <img src={file.file_path}/>
-          )) : (
+          {files.length ? (
+            files.map((file) => {
+              const base64String = new Buffer.from(file.file_path).toString(
+                "base64"
+              );
+              return (
+                <img src={`data:image/png;base64,${base64String}`} alt="" />
+              );
+            })
+          ) : (
             <div className="file-none">
               <div className="topic">오늘 먹은(먹을) 점심은?</div>
             </div>
