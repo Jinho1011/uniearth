@@ -108,6 +108,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
         data = await data;
         data = JSON.parse(data);
         setComments(data.comments);
+        //hey
       }
     };
     init();
@@ -162,7 +163,10 @@ const Post = ({ user, post, refresh, setRefresh }) => {
           <div className="likes-container"></div>
         </div>
         <div className="content-body">
-          {files.length ? <Images></Images> : (
+          {files.length ? (            files.map((file) => {
+              console.log(file.file_path);
+              return <img src={file.file_path}></img>;
+            })) : (
             <div className="file-none">
               <div className="topic">오늘 먹은(먹을) 점심은?</div>
             </div>
