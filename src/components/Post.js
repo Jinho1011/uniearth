@@ -72,7 +72,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
       redirect: 'follow'
     };
 
-    return fetch("/uniearth/files/file_post/", post.SEQ, requestOptions)
+    return fetch("/uniearth/files/file_post/" + post.SEQ, requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
