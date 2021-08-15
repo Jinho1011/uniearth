@@ -69,7 +69,8 @@ const Post = ({ user, post, refresh, setRefresh }) => {
         data = JSON.parse(data);
         setComments(data.comments);
       }
-
+      
+      console.log(res2);
       if (res2.status === 200) {
         data2 = await data2;
         data2 = JSON.parse(data2);
