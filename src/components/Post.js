@@ -61,10 +61,18 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   useEffect(() => {
     const init = async () => {
       let { res, data } = await getComments();
+      let {res2,data2} = await getFiles();
+
       if (res.status === 200) {
         data = await data;
         data = JSON.parse(data);
         setComments(data.comments);
+      }
+
+      if (res2.status === 200) {
+        data2 = await data2;
+        data2 = JSON.parse(data2);
+        console.log("🚀 ~ file: Post.js ~ line 75 ~ init ~ data2", data2)
       }
     };
     init();
@@ -82,6 +90,48 @@ const Post = ({ user, post, refresh, setRefresh }) => {
     init();
   }, [refresh]);
 
+  const getFiles = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    return fetch("/uniearth/files/file_post/" + post.SEQ, requestOptions)
+      .then((response) => {
+        return { res: response, data: response.text() };
+      })
+      .catch((error) => console.log("error", error));
+  }
+
+  //get /uniearth/files/file_post/게시글번호
+  // --> 리턴: file_path 사용
+  // <img src=file_path />
+  /*
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "Authorization",
+      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+      method: "get",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+    return fetch("/uniearth/files/file_post/포스트번호", requestOptions)
+      .then((response) => response.text())
+      .then((result) => JSON.parse(result))
+      .catch((error) => console.log("error", error));
+  */
   const Images = (files) => {
     files.map((file) => {
       return <div>file</div>;
