@@ -117,17 +117,13 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   const Images = () => {
     files.map(file => {
       console.log(file.file_path);
-      var reader = new FileReader();
-      reader.readAsDataURL(file.file_path); 
-      reader.onloadend = function() {
-          var base64data = reader.result;                
-          return <img src={base64data}></img>
-      }
+      var bufferBase64 = new Buffer( file.file_path, 'binary' ).toString('base64');
+      console.log(bufferBase64);
       
     })
   }
 
- 
+
 
   //get /uniearth/files/file_post/게시글번호
   // --> 리턴: file_path 사용
