@@ -63,12 +63,9 @@ const Post = ({ user, post, refresh, setRefresh }) => {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b");
 
-    var raw = "";
-
     var requestOptions = {
       method: 'GET',
       headers: myHeaders,
-      body: raw,
       redirect: 'follow'
     };
 
