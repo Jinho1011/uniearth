@@ -130,7 +130,6 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
     var requestOptions = {
       method: "POST",
       body: formdata,
-      headers: {'Content-Type': 'multipart/form-data'},
       redirect: "follow",
     };
 
