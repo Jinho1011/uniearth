@@ -137,6 +137,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
       .catch((error) => console.log("error", error));
   */
   const Images = (files) => {
+  console.log("🚀 ~ file: Post.js ~ line 140 ~ Images ~ files", files)
     files.map((file) => {
       return <img src={file.file_path}></img>;
     });
