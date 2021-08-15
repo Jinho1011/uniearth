@@ -166,7 +166,9 @@ const Post = ({ user, post, refresh, setRefresh }) => {
           <div className="likes-container"></div>
         </div>
         <div className="content-body">
-          {files.length ? (<Images></Images>) : (
+          {files.length ? (files.map(file=> {
+            <img src={file.file_path}/>
+          })) : (
             <div className="file-none">
               <div className="topic">오늘 먹은(먹을) 점심은?</div>
             </div>
