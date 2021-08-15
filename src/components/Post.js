@@ -61,20 +61,21 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   const getFiles = () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Authorization",
-      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
-    );
+    myHeaders.append("Authorization", "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b");
+
+    var raw = "";
 
     var requestOptions = {
-      method: "GET",
+      method: 'GET',
       headers: myHeaders,
-      redirect: "follow",
+      body: raw,
+      redirect: 'follow'
     };
 
-    return fetch("/uniearth/files/file_post/" + post.SEQ, requestOptions)
-      .then((response) => response)
-      .catch((error) => console.log("error", error));
+    return fetch("/uniearth/files/file_post/62", post.SEQ, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   }
 
   useEffect(() => {
