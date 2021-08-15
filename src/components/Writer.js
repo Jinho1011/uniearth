@@ -119,7 +119,6 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
 
   const uploadFile = (file) => {
     var myHeaders = new Headers();
-    //myHeaders.append("Content-Type", "multipart/form-data");
     myHeaders.append(
       "Authorization",
       "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
@@ -127,6 +126,7 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
 
     var formdata = new FormData();
     formdata.append("post_file.upload", file);
+    formdata.enctype = "multipart/form-data";
 
     var requestOptions = {
       method: "POST",
