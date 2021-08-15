@@ -126,11 +126,11 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
 
     var formdata = new FormData();
     formdata.append("post_file.upload", file);
-    formdata.enctype = "multipart/form-data";
 
     var requestOptions = {
       method: "POST",
       body: formdata,
+      headers: {'Content-Type': 'multipart/form-data'},
       redirect: "follow",
     };
 
