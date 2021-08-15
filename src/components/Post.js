@@ -73,10 +73,8 @@ const Post = ({ user, post, refresh, setRefresh }) => {
     };
 
     return fetch("/uniearth/files/file_post/" + post.SEQ, requestOptions)
-      .then((response) => {
-        console.log("🚀 ~ file: Post.js ~ line 77 ~ .then ~ response", response.text())
-        return { res: response, data: response.text() };
-      })
+      .then((response) => {response
+      }).then(res => res.text())
       .catch((error) => console.log("error", error));
   }
 
