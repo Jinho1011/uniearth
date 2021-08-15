@@ -114,7 +114,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   }, [refresh]);
 
   const Images = () => {
-    files.map(file => {
+    return files.map(file => {
       <img src={file.file_path}></img>
     })
   }
