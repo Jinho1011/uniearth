@@ -82,6 +82,12 @@ const Post = ({ user, post, refresh, setRefresh }) => {
     init();
   }, [refresh]);
 
+  const Images = (files) => {
+    files.map((file) => {
+      return <div>file</div>;
+    });
+  };
+
   return (
     <div className="post-container">
       <div className="content-container">
@@ -100,7 +106,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
         </div>
         <div className="content-body">
           {files.length ? (
-            <div></div>
+            <Images files={files}></Images>
           ) : (
             <div className="file-none">
               <div className="topic">오늘 먹은(먹을) 점심은?</div>
