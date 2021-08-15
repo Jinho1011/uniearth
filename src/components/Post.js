@@ -113,6 +113,12 @@ const Post = ({ user, post, refresh, setRefresh }) => {
     init();
   }, [refresh]);
 
+  const Images = () => {
+    files.map(file => {
+      <img src={file.file_path}></img>
+    })
+  }
+
  
 
   //get /uniearth/files/file_post/게시글번호
@@ -155,9 +161,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
           <div className="likes-container"></div>
         </div>
         <div className="content-body">
-          {files.length ? {files.map(file => {
-            <img src={file.file_path}/></img>
-          })} : (
+          {files.length ? <Images></Images> : (
             <div className="file-none">
               <div className="topic">오늘 먹은(먹을) 점심은?</div>
             </div>
