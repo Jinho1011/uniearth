@@ -32,7 +32,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
       .then((response) => response.text())
       .then((result) => {
         setRefresh(true);
-        console.log("🚀 ~ file: Post.js ~ line 65 ~ .then ~ result", result);
+        // console.log("🚀 ~ file: Post.js ~ line 65 ~ .then ~ result", result);
       })
       .catch((error) => console.log("error", error));
   };
