@@ -53,6 +53,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
 
     return fetch("/uniearth/comments/cmt_post/" + post.SEQ, requestOptions)
       .then((response) => {
+        console.log("🚀 ~ file: Post.js ~ line 56 ~ .then ~ response", response)
         return { res: response, data: response.text() };
       })
       .catch((error) => console.log("error", error));
@@ -74,6 +75,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
 
     return fetch("/uniearth/files/file_post/" + post.SEQ, requestOptions)
       .then((response) => {
+        console.log(response);
         return { res: response, data: response.text() };
       })
       .catch((error) => console.log("error", error));
@@ -91,11 +93,6 @@ const Post = ({ user, post, refresh, setRefresh }) => {
       }
       
       console.log(res2);
-      if (res2.status === 200) {
-        data2 = await data2;
-        data2 = JSON.parse(data2);
-        console.log("🚀 ~ file: Post.js ~ line 75 ~ init ~ data2", data2)
-      }
     };
     init();
   }, []);
