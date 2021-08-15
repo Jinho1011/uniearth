@@ -86,6 +86,11 @@ const Post = ({ user, post, refresh, setRefresh }) => {
         setComments(data.comments);
       }
       
+      if(fileRes){
+        //fileRes.files[0]: {file_path: "[B@5a53782d", file_timestamp: "2021-08-15 20:12:48.0", file_owner: "dong", file_post: "64", SEQ: "5", …}
+        //fileRes.files[1]: {file_path: "[B@5a53782d", file_timestamp: "2021-08-15 20:12:48.0", file_owner: "dong", file_post: "64", SEQ: "6", …}
+        setFiles(fileRes.files)
+      }
       console.log("🚀 ~ file: Post.js ~ line 94 ~ init ~ res2", fileRes)
       // if(res2?.status === 200) {
       //   data2 = await data2;
@@ -133,7 +138,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   */
   const Images = (files) => {
     files.map((file) => {
-      return <div>file</div>;
+      return <img src={file.file_path}></img>;
     });
   };
 
