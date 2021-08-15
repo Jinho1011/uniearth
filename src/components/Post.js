@@ -117,7 +117,10 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   const Images = () => {
     files.map(file => {
       console.log(file.file_path);
-      return <img src={URL.createObjectURL(file.file_path)}></img>
+      let a = new FileReader();
+      a.onload = function(e) {callback(e.target.result);}
+      let imagePath = a.readAsDataURL(blob);
+      return <img src={imagePath}></img>
     })
   }
 
@@ -163,10 +166,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
           <div className="likes-container"></div>
         </div>
         <div className="content-body">
-          {files.length ? (            files.map((file) => {
-              console.log(file.file_path);
-              return <img src={file.file_path}></img>;
-            })) : (
+          {files.length ? (<Images></Images>) : (
             <div className="file-none">
               <div className="topic">오늘 먹은(먹을) 점심은?</div>
             </div>
