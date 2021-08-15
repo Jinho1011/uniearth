@@ -66,9 +66,9 @@ const Posts = ({ token, coord, refresh, setRefresh }) => {
   return (
     <div className="posts-container">
       {posts
-        .slice(0)
-        .reverse()
-        .map((post) => {
+        ?.slice(0)
+        ?.reverse()
+        ?.map((post) => {
           let diff = coord.lng - post.post_longitude;
           if (-10 < diff < 10)
             return (
