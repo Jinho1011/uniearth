@@ -52,17 +52,16 @@ const Post = ({ user, post, refresh, setRefresh }) => {
     };
 
     return fetch("/uniearth/comments/cmt_post/" + post.SEQ, requestOptions)
-      .then((response) => {
-        console.log("🚀 ~ file: Post.js ~ line 56 ~ .then ~ response", response)
-        return { res: response, data: response.text() };
+      .then((response) => {response
       })
+      .then(res => res)
       .catch((error) => console.log("error", error));
   };
 
   useEffect(() => {
     const init = async () => {
       let { res, data } = await getComments();
-      let {res2,data2} = await getFiles();
+      let fileRes = await getFiles();
 
       if (res.status === 200) {
         data = await data;
@@ -70,12 +69,7 @@ const Post = ({ user, post, refresh, setRefresh }) => {
         setComments(data.comments);
       }
       
-      console.log(res2);
-      if (res2.status === 200) {
-        data2 = await data2;
-        data2 = JSON.parse(data2);
-        console.log("🚀 ~ file: Post.js ~ line 75 ~ init ~ data2", data2)
-      }
+      console.log(fileRes);
     };
     init();
   }, []);
