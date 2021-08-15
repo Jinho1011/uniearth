@@ -113,7 +113,7 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
     console.log(postResult.posts._update_seq);
     console.log(file);
     var raw = JSON.stringify({  
-      file_post: postResult.postResult._update_seq,
+      file_post: postResult.posts._update_seq,
       file_owner: user.useremail,
       file_path: file,
       file_size: 1111
