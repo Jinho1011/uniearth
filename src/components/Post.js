@@ -117,10 +117,13 @@ const Post = ({ user, post, refresh, setRefresh }) => {
   const Images = () => {
     files.map(file => {
       console.log(file.file_path);
-      let a = new FileReader();
-      a.onload = function(e) {callback(e.target.result);}
-      let imagePath = a.readAsDataURL(blob);
-      return <img src={imagePath}></img>
+      var reader = new FileReader();
+      reader.readAsDataURL(file.file_path); 
+      reader.onloadend = function() {
+          var base64data = reader.result;                
+          return <img src={base64data}></img>
+      }
+      
     })
   }
 
