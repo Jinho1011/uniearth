@@ -101,23 +101,35 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
       .catch((error) => console.log("error", error));
   };
 
-  const createFile = (postResult, fileResult) => {
-    fileResult.then(res => {
-      let myHeaders = new Headers();
-      myHeaders.append(
-        "Authorization",
-        "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
-      );
-      myHeaders.append("Content-Type", "application/json");
-      
-      let raw 
-    }).catch(err => {
-      alert('err');
-      alert(err);
-    })
+  const createFile = (postResult, file) => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "Authorization",
+      "Bearer 383d6d665c39497ab039a16c88d5843f9dcafe4b337dfecf5c38f18c81c2f98b"
+    );
+    myHeaders.append("Content-Type", "application/json");
+
+    //_update_seq을 리턴
+    var raw = JSON.stringify({  
+      file_post: postResult._updated_seq,
+      file_owner: user.useremail,
+      file_path: file,
+      file_size: 1111
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+    return fetch("/uniearth/files", requestOptions)
+      .then((response) => response.text())
+      .then((result) => JSON.parse(result))
+      .catch((error) => console.log("error", error));
   }
 
-  const uploadFile = (file) => {
+  const uploadFile = (file,) => {
     var myHeaders = new Headers();
     myHeaders.append(
       "Authorization",
@@ -126,7 +138,7 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
 
     var formdata = new FormData();
     formdata.append("post_file.upload", file);
-
+    //enctype: multipart/form-data
     var requestOptions = {
       method: "POST",
       body: formdata,
@@ -153,8 +165,8 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
       // 파일이 있는 경우
       files.map((file) => {
         console.log(file);
-        let fRes = uploadFile(file);
-        createFile(res, fRes);
+      //  let fRes = uploadFile(file);
+        createFile(res, file);
       });
     }
     setRefresh(true);
