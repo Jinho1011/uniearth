@@ -90,10 +90,11 @@ const Post = ({ user, post, refresh, setRefresh }) => {
         setComments(data.comments);
       }
       
+      console.log("🚀 ~ file: Post.js ~ line 94 ~ init ~ res2", res2)
       if(res2?.status === 200) {
-        console.log("🚀 ~ file: Post.js ~ line 94 ~ init ~ res2", res2)
         data2 = await data2;
         data2 = JSON.parse(data2);
+        console.log("🚀 ~ file: Post.js ~ line 97 ~ init ~ data2", data2)
       }
     };
     init();
