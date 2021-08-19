@@ -8,4 +8,5 @@ export const Background = styled.div`
   left: 0;
   min-width: 100%;
   min-height: 100vh;
+  padding-bottom: 100px;
 `;
