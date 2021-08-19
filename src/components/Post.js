@@ -169,12 +169,29 @@ const Post = ({ user, post, refresh, setRefresh }) => {
         <div className="content-body">
           {files.length ? (
             files.map((file) => {
-              const base64String = new Buffer.from(file.file_path).toString(
-                "base64"
-              );
-              return (
-                <img src={`data:image/png;base64,${base64String}`} alt="" />
-              );
+              // const base64String = new Buffer.from(file.file_path).toString(
+              //   "base64"
+              // );
+              // const url = URL.createObjectURL(
+              //   new Blob([file.file_path], { type: "image/*" })
+              // );
+              var data = new Uint8Array([
+                91, 123, 34, 112, 114, 101, 118, 105, 101, 119, 34, 58, 34, 98,
+                108, 111, 98, 58, 104, 116, 116, 112, 58, 92, 47, 92, 47, 49,
+                51, 46, 49, 50, 52, 46, 49, 51, 51, 46, 50, 48, 56, 58, 51, 48,
+                48, 48, 92, 47, 99, 50, 48, 49, 50, 53, 53, 101, 45, 100, 52,
+                53, 101, 45, 52, 56, 51, 50, 45, 97, 52, 56, 99, 45, 99, 52, 57,
+                101, 54, 50, 48, 97, 99, 98, 49, 50, 34, 44, 34, 112, 97, 116,
+                104, 34, 58, 34, -21, -111, -112, -22, -75, -65, 46, 80, 78, 71,
+                34, 125, 93,
+              ]);
+
+              var buffer = new Buffer.from(file.file_path);
+              // var data = new Uint8Array([buffer]);
+              var blob = new Blob([data], { type: "image/jpeg" });
+              var url = URL.createObjectURL(blob);
+
+              return <img src={url} alt="" />;
             })
           ) : (
             <div className="file-none">
@@ -204,7 +221,10 @@ const Post = ({ user, post, refresh, setRefresh }) => {
           <a onClick={leaveComment}>올리기</a>
           <input
             className="comment-input"
-            onChange={(e) => setComment(e.target.value)}
+            onChange={(e) => {
+              setComment(e.target.value);
+              setRefresh(true);
+            }}
             placeholder="댓글을 적어보세요"
             value={comment}
           ></input>

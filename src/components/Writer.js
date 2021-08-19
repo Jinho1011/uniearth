@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-modal";
 import Dropzone from "./Dropzone";
-import Axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import "../styles/Writer.css";
@@ -79,7 +78,7 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
     myHeaders.append("Content-Type", "application/json");
 
     //_update_seq을 리턴
-    var raw = JSON.stringify({  
+    var raw = JSON.stringify({
       post_title: "제목",
       post_info: fillout,
       post_topic: 1,
@@ -112,11 +111,11 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
     //_update_seq을 리턴
     console.log(postResult.posts._update_seq);
     console.log(file);
-    var raw = JSON.stringify({  
+    var raw = JSON.stringify({
       file_post: postResult.posts._update_seq,
       file_owner: user.useremail,
       file_path: file,
-      file_size: 1111
+      file_size: 1111,
     });
 
     var requestOptions = {
@@ -129,9 +128,9 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
       .then((response) => response.text())
       .then((result) => JSON.parse(result))
       .catch((error) => console.log("error", error));
-  }
+  };
 
-  const uploadFile = (file,) => {
+  const uploadFile = (file) => {
     var myHeaders = new Headers();
     myHeaders.append(
       "Authorization",
@@ -150,14 +149,6 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
     return fetch("/ftp/execute", requestOptions)
       .then((result) => result)
       .catch((error) => console.log("error", error));
-
-    // fetch(
-    //   "https://uniearth.api.dev-whoan.xyz:58443/ftp/execute",
-    //   requestOptions
-    // )
-    //   .then((response) => response.text())
-    //   .then((result) => console.log(result))
-    //   .catch((error) => console.log("error", error));
   };
 
   const submit = async () => {
@@ -165,9 +156,11 @@ const Writer = ({ showModal, setShowModal, token, setRefresh }) => {
 
     if (files.length) {
       // 파일이 있는 경우
+      alert("파일 업로드는 아직 준비중입니다.");
+
       files.map((file) => {
         console.log(file);
-      //  let fRes = uploadFile(file);
+        let fRes = uploadFile(file);
         createFile(res, file);
       });
     }
