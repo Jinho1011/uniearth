@@ -67,7 +67,6 @@ const SignUp = () => {
 
     if (res.code === "201") {
       // success
-      alert("signup success!");
       setDone(true);
     } else {
       // error
